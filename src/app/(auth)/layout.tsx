@@ -8,9 +8,9 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="grid grid-cols-1 md:grid-cols-2 ">
+    <main className="grid grid-cols-1 lg:grid-cols-2 w-full min-h-screen ">
       {/* static section */}
-      <section className="bg-white relative overflow-hidden  ">
+      <section className="bg-white relative overflow-hidden hidden lg:block  ">
         {/* circle part */}
         <div className="absolute w-[25.1rem] h-[25.1rem] left-[24rem] top-[7rem] rounded-full bg-blue-400 blur-[200px]"></div>
         <div className="absolute w-[25.1rem] h-[25.1rem] top-[42rem] left-[0.9rem] rounded-full bg-blue-400 blur-[200px]"></div>
@@ -24,7 +24,7 @@ export default function layout({
       </section>
 
       {/* sections */}
-      <div>{children}</div>
+      <div className="w-full min-h-screen flex flex-col" >{children}</div>
     </main>
   );
 }
