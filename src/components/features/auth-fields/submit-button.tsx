@@ -8,7 +8,10 @@ interface SubmitButtonProps {
   message: Error | null;
   loading: boolean;
   disbale: boolean;
-  isPending:boolean;
+  isPending: boolean;
+  text: string;
+  textLink: string;
+  link:string;
 }
 export default function SubmitButton({
   label,
@@ -16,6 +19,9 @@ export default function SubmitButton({
   loading,
   disbale,
   isPending,
+  text,
+  textLink,
+  link,
 }: SubmitButtonProps) {
   return (
     <div className="flex flex-col gap-6 pt-4">
@@ -24,17 +30,17 @@ export default function SubmitButton({
         <Button
           variant="default"
           className="w-full"
-          disabled={ isPending || (!disbale && loading)}
+          disabled={isPending || (!disbale && loading)}
         >
           {isPending ? 'Loading...' : label}
         </Button>
         <p className="text-sm font-medium text-gray-500">
-          Already have an account?
+          {text}
           <Link
-            href={'/login'}
+            href={link}
             className="pl-2 text-blue-600 hover:text-blue-700"
           >
-            Login
+            {textLink}
           </Link>
         </p>
       </div>

@@ -142,6 +142,9 @@ export default function RegisterForm() {
               loading={formState.isSubmitting}
               disbale={formState.isValid}
               isPending={isPending}
+              text=' Already have an account?'
+              textLink='Login'
+              link='/login'
             />
           </section>
         </form>
