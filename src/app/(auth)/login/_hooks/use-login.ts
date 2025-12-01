@@ -1,13 +1,35 @@
-import { useMutation } from "@tanstack/react-query"
+import { LoginFormFields } from '@/lib/schemas/login.schema';
+import { useMutation } from '@tanstack/react-query';
+import { signIn } from 'next-auth/react';
+export const UseLogin = () => {
+  const {
+    mutate: loginForm,
+    error,
+    isPending,
+  } = useMutation({
+    mutationFn: async (data: LoginFormFields) => {
+      const payload = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
 
-export const UseLogin=()=>{
+      if (payload?.ok) {
+        const callbackUrl =
+          new URLSearchParams(location.search).get('callbackUrl') || '/';
+        return (location.href = callbackUrl);
+      }
 
-    const {mutate:loginForm , error , isPending} =useMutation({
+      if (payload?.error) {
+         throw new Error("Invalid email or password");
+      }
 
-    })
-    return{
-loginForm,
-error,
-isPending,
-    }
-}
+      return payload;
+    },
+  });
+  return {
+    loginForm,
+    error,
+    isPending,
+  };
+};

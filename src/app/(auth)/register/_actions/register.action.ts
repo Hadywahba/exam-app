@@ -1,6 +1,6 @@
 "use server"
 import { RegisterFormFields } from '@/lib/schemas/register.schema';
-import { RegisterResponse } from '../_utility/register';
+import { RegisterResponse } from '../_types/register';
 
 // Register is a service function that calls the backend
 export async function Register(data: RegisterFormFields) {

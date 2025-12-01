@@ -11,22 +11,28 @@ import SubmitButton from '@/components/features/auth-fields/submit-button';
 
 export default function LoginForm() {
   // Mutation
-  const { error, isPending } = UseLogin();
-  const { register, handleSubmit, formState } = useForm<LoginFormFields>({
-    mode: 'all',
-    resolver: zodResolver(loginschema),
-    defaultValues: {
-      email: '',
-
-      password: '',
-    },
-  });
+  const { error, isPending, loginForm } = UseLogin();
+  const { register, handleSubmit, formState, setError } =
+    useForm<LoginFormFields>({
+      mode: 'all',
+      resolver: zodResolver(loginschema),
+      defaultValues: {
+        email: '',
+        password: '',
+      },
+    });
 
   const onsubmit: SubmitHandler<LoginFormFields> = async (data) => {
-    console.log(data);
+    loginForm(data, {
+      onError: (error) => {
+        setError('root', {
+          message: error?.message || "Login failed, please try again",
+        });
+      },
+    });
   };
   return (
-    <main className="min-h-screen flex w-full flex-col justify-center gap-3 px-4 pt-20  lg:w-[28.25rem]">
+    <main className="flex min-h-screen w-full flex-col justify-center gap-3 px-4 pt-20 lg:w-[28.25rem]">
       <h1 className="pb-6 text-start font-inter text-3xl font-bold">Login</h1>
       <form
         onSubmit={handleSubmit(onsubmit)}
@@ -68,9 +74,9 @@ export default function LoginForm() {
             loading={formState.isSubmitting}
             disbale={formState.isValid}
             isPending={isPending}
-            text='Don’t have an account?'
-            textLink='Create yours'
-            link='/register'
+            text="Don’t have an account?"
+            textLink="Create yours"
+            link="/register"
           />
         </section>
       </form>
