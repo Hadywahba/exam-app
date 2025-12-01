@@ -54,7 +54,7 @@ export default function LoginForm() {
           />
         </section>
         <Link
-          href={'/register'}
+          href={'/forgot-password'}
           className="text-end text-sm font-medium text-blue-600"
         >
           Forgot your password?
