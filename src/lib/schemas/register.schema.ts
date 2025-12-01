@@ -16,8 +16,50 @@ export const registerschema = z
       .nonempty(' your name is required')
       .regex(/^[a-zA-Z]+$/, 'Only letters allowed'),
     email: z.string().nonempty(' your email is required'),
-    phone: z.string().nonempty(' your phone is required'),
-    password: z.string().nonempty(' your password is required'),
+    phone: z
+      .string()
+      .nonempty(' your phone is required')
+      .regex(
+        /^(\+2010|\+0|\+2011|\+2012|\+2015|010|011|012|015)\d{8}$/,
+        'Invalid Egyptian phone number',
+      ),
+
+    password: z
+      .string()
+      .nonempty(' your password is required')
+      .superRefine((value, ctx) => {
+        if (value.length < 8) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Password must be at least 8 characters',
+          });
+        }
+        if (!/[A-Z]/.test(value)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Password must contain at least one uppercase letter',
+          });
+        }
+        if (!/[a-z]/.test(value)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Password must contain one lowercase letter',
+          });
+        }
+        if (!/[0-9]/.test(value)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Password must contain one number',
+          });
+        }
+        if (!/[@$!%*?&]/.test(value)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Password must contain one special character',
+          });
+        }
+      }),
+
     rePassword: z.string().nonempty(' your Confirm Password is required'),
   })
   .refine((data) => data.password === data.rePassword, {

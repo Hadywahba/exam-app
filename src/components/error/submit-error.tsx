@@ -1,30 +1,21 @@
+'usec client';
 import React from 'react';
-
-interface Props {
-  isError: boolean;
-  error: any;
+import { CircleX } from 'lucide-react';
+interface SubmitErrorProps {
+  errors: Error | null;
 }
 
-const SubmitError = ({ isError, error }: Props) => {
-  if (!isError) return null;
-
-  const errorMessage = error?.response?.data?.message;
-
+export default function SubmitError({ errors }: SubmitErrorProps) {
   return (
-    <div className=" border border-red-500 bg-rose-50 p-3 text-xs text-red-500 text-center">
-      {Array.isArray(errorMessage) ? (
-        errorMessage.map((err: string, index: number) => (
-          <p key={index}>* {err}</p>
-        ))
-      ) : (
-        <p>
-          {errorMessage ??
-            error?.message ??
-            'An error occurred. Please try again.'}
-        </p>
+    <>
+      {errors && (
+        <div className="relative w-full border border-red-500 bg-red-50 p-2 text-center text-sm text-red-600">
+          <div className="absolute right-1/2 top-0 -translate-y-1/2 translate-x-1/2 bg-red-50 rounded-xl">
+            <CircleX className="h-4 w-4  text-red-600" />
+          </div>
+          <p>{errors.message}</p>
+        </div>
       )}
-    </div>
+    </>
   );
-};
-
-export default SubmitError;
+}

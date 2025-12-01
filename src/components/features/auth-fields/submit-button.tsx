@@ -1,31 +1,34 @@
-import SubmitError from '@/components/error/submit-error';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import React from 'react';
-import { FieldErrors, FieldValues } from 'react-hook-form';
-interface SubmitButtonProps<T extends FieldValues> {
-  label: string;
-  errors: FieldErrors<T>;
-  isError: boolean;
-  isregister?:boolean;
-}
+import SubmitError from '@/components/error/submit-error';
 
-export default function SubmitButton<T extends FieldValues>({
+interface SubmitButtonProps {
+  label: string;
+  message: Error | null;
+  loading: boolean;
+  disbale: boolean;
+  isPending:boolean;
+}
+export default function SubmitButton({
   label,
-  errors,
-  isError,
-  isregister,
-}: SubmitButtonProps<T>) {
+  message,
+  loading,
+  disbale,
+  isPending,
+}: SubmitButtonProps) {
   return (
-    <div>
-      <div className="mt-2">
-        <SubmitError error={errors} isError={isError} />
-      </div>
-      <div className='flex w-full flex-col items-center justify-center gap-9 pt-6'>
-        <Button variant="default" className="w-full">
-          {label}
+    <div className="flex flex-col gap-6 pt-4">
+      <SubmitError errors={message} />
+      <div className="flex w-full flex-col items-center justify-center gap-9">
+        <Button
+          variant="default"
+          className="w-full"
+          disabled={ isPending || (!disbale && loading)}
+        >
+          {isPending ? 'Loading...' : label}
         </Button>
-        {isregister && <p className="text-sm font-medium text-gray-500">
+        <p className="text-sm font-medium text-gray-500">
           Already have an account?
           <Link
             href={'/login'}
@@ -33,10 +36,8 @@ export default function SubmitButton<T extends FieldValues>({
           >
             Login
           </Link>
-        </p>}
-        
+        </p>
       </div>
-    
     </div>
   );
 }

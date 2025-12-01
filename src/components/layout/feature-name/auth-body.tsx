@@ -1,18 +1,14 @@
 import Image from "next/image";
 import React from "react";
-import { Inter } from "next/font/google";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["700"],
-  variable: "--font-inter",
-});
+
+
 export default function AuthBody() {
   return (
     <main className="flex flex-col justify-center items-start gap-12">
         {/* auth body header */}
       <section>
-        <h1 className={`text-gray-800 text-3xl font-bold ${inter.className}`}>
+        <h1 className='text-gray-800 text-3xl font-bold font-inter'>
           Empower your learning journey with our smart exam platform.
         </h1>
       </section>

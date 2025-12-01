@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import { Label } from '@/components/ui/label';
-import { Inter } from 'next/font/google';
 import { PhoneInput } from './phone-field';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import EmailField from '@/components/features/auth-fields/email-field';
@@ -13,13 +12,14 @@ import {
 } from '@/lib/schemas/register.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SubmitButton from '@/components/features/auth-fields/submit-button';
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-inter',
-});
+import { UseRegister } from '../_hooks/use-register';
+
+
 export default function RegisterForm() {
-  const { register, handleSubmit, control, formState } =
+  // Mutations
+  const {error , isPending , registerForm} =UseRegister()
+
+  const { register, handleSubmit, control, formState} =
     useForm<RegisterFormFields>({
       mode: 'all',
       resolver: zodResolver(registerschema),
@@ -33,13 +33,18 @@ export default function RegisterForm() {
         rePassword: '',
       },
     });
-  const onsubmit: SubmitHandler<RegisterFormFields> = (data) => {
-    console.log(data);
+
+  const onsubmit: SubmitHandler<RegisterFormFields> = async (data) => {
+    const newData = {
+      ...data,
+      phone: data.phone.replace(/^\+20/, '0'),
+    };
+    registerForm(newData) 
   };
   return (
     <main>
       <div className="flex flex-col justify-center gap-4 px-4">
-        <h1 className={`pb-6 text-3xl font-bold ${inter.className}`}>
+        <h1 className='pb-6 text-3xl font-bold font-inter'>
           Create Account
         </h1>
         <form
@@ -127,13 +132,16 @@ export default function RegisterForm() {
               placeholder="enter your rePassword"
             />
           </section>
+      
+
           {/* button */}
-          <section className="">
+          <section>
             <SubmitButton
-              errors={formState.errors}
-              isError={false}
-              label=" Create Account"
-              isregister={true}
+              label="Create Account"
+              message={error}
+              loading={formState.isSubmitting}
+              disbale={formState.isValid}
+              isPending={isPending}
             />
           </section>
         </form>
