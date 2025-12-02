@@ -4,7 +4,7 @@ import Link from 'next/link';
 import SubmitError from '@/components/error/submit-error';
 
 interface SubmitButtonProps {
-  label: string;
+ label: React.ReactNode;
   message: Error | null;
   loading: boolean;
   disbale: boolean;

@@ -3,14 +3,15 @@ import Credentials from 'next-auth/providers/credentials';
 import { LoginResponse } from './app/(auth)/login/_types/login';
 export const authoption: NextAuthOptions = {
   providers: [
-    // Credentials is one way to login
+    
+    // Credentials provider allows users to sign in with email and password
     Credentials({
       name: 'credential',
       credentials: {
         email: {},
         password: {},
       },
-      //   authorize is a function that call backend
+       // authorize is a function that calls the backend
       authorize: async (credentials) => {
         const response = await fetch(`${process.env.API}/auth/signin`, {
           method: 'POST',
