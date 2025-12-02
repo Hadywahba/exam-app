@@ -13,7 +13,7 @@ import { MoveRight } from 'lucide-react';
 import { UseForgot } from '../_hooks/use-forgot-password';
 export default function ForgotPasswordForm() {
   // Mutation
-  const { error, isPending, forgot } = UseForgot();
+  const { error, isPending, forgot } = UseForgot({ redirect: true });
 
   //Form
   const { register, formState, handleSubmit } =
@@ -31,7 +31,7 @@ export default function ForgotPasswordForm() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full flex-col justify-center gap-3 pt-20 lg:w-[28.25rem]">
+    <main className="mx-auto flex min-h-screen w-full flex-col justify-center gap-3 px-6 pt-20 md:w-[70%] lg:w-[28.25rem] lg:px-0">
       <div className="pb-6">
         <h1 className="mb-2 font-inter text-3xl font-bold text-gray-800">
           Forgot Password

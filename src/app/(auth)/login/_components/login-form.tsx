@@ -26,13 +26,13 @@ export default function LoginForm() {
     loginForm(data, {
       onError: (error) => {
         setError('root', {
-          message: error?.message || "Login failed, please try again",
+          message: error?.message || 'Login failed, please try again',
         });
       },
     });
   };
   return (
-    <main className="flex min-h-screen w-full flex-col justify-center gap-3 px-4 pt-20 lg:w-[28.25rem]">
+    <main className="flex min-h-screen w-full flex-col justify-center gap-3 px-6 pt-20 md:w-[70%] lg:w-[28.25rem] lg:px-0">
       <h1 className="pb-6 text-start font-inter text-3xl font-bold">Login</h1>
       <form
         onSubmit={handleSubmit(onsubmit)}

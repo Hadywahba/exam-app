@@ -4,8 +4,7 @@ import { forgotPassword } from '@/lib/services/forgot-password.service';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-export const UseForgot = () => {
-    
+export const UseForgot = ({ redirect = true }) => {
   // Navigation
   const router = useRouter();
 
@@ -28,13 +27,16 @@ export const UseForgot = () => {
       return payload;
     },
 
-    onSuccess: () => {
+    onSuccess: (_payload, variables) => {
       toast({
         title: '✅ OTP sent to your email',
         variant: 'success',
       });
 
-      router.push('/forgot-password?step=2');
+      // only redirect when allowed
+      if (redirect) {
+        router.push(`/forgot-password?step=2&email=${variables?.email}`);
+      }
     },
   });
   return {
