@@ -33,7 +33,7 @@ export default function VerifyPasswordForm() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full flex-col justify-center gap-8 px-6 md:w-[70%] lg:w-[28.25rem] lg:px-0">
+    <main className="mx-auto flex min-h-screen w-full flex-col justify-center gap-8 pt-20 px-6 md:w-[70%] lg:w-[28.25rem] lg:px-0">
       {/* back button section */}
 
       <div className="flex h-[2.5rem] w-[2.5rem] items-center justify-center border-[0.0938rem] border-gray-200">
