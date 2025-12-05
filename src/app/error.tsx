@@ -1,10 +1,22 @@
-"use client"
-import React from 'react'
+'use client';
 
-export default function error() {
+type ErrorProps = {
+  error: Error & { digest?: string };
+  reset: () => void;
+};
+
+export default function Error({ error }: ErrorProps) {
+
   return (
-    <div>
-      
-    </div>
-  )
+    <html>
+      <body>
+        <div className="flex h-screen flex-col items-center justify-center">
+          <h1 className="text-3xl font-bold text-red-500">
+            Something went wrong
+          </h1>
+          <p className="text-red-500">{error.message}</p>
+        </div>
+      </body>
+    </html>
+  );
 }
