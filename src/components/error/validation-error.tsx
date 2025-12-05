@@ -7,17 +7,25 @@ interface Props {
 }
 
 const ValidationError = ({ errors, name }: Props) => {
-  const getNestedError = (obj: any, path: string) => {
-    return path.split('.').reduce((acc, key) => acc?.[key], obj);
+  const getNestedError = (obj: unknown, path: string) => {
+    return path.split('.').reduce((acc: unknown, key: string) => {
+      if (
+        acc &&
+        typeof acc === 'object' &&
+        key in acc
+      ) {
+        return (acc as Record<string, unknown>)[key];
+      }
+      return undefined;
+    }, obj);
   };
 
-  const errorMessage = getNestedError(errors, name)?.message as
-    | string
-    | undefined;
+  const errorMessage = (getNestedError(errors, name) as { message?: string })
+    ?.message;
 
   if (!errorMessage) return null;
 
-  return <div className="mt-2  text-xs text-red-500">{errorMessage}</div>;
+  return <div className="mt-2 text-xs text-red-500">{errorMessage}</div>;
 };
 
 export default ValidationError;
