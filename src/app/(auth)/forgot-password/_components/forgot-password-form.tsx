@@ -71,7 +71,8 @@ export default function ForgotPasswordForm() {
               text="Don’t have an account?"
               textLink="Create yours"
               link="/register"
-               isAuth={true}
+              isAuth={true}
+              isprofile={false}
             />
           </section>
         </form>

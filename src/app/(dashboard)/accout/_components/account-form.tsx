@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { UseAccount } from '../_hooks/use-account';
-import { AccountFormFields, accountschema } from '@/lib/schemas/account.shcema';
+import { AccountFormFields, accountschema } from '@/lib/schemas/account.schema';
 import SubmitButton from '@/components/features/auth-fields/submit-button';
 import { UseProfile } from '../_hooks/use-profile';
 import Spinner from '@/components/loaders/Spinner';
@@ -18,7 +18,7 @@ export default function AccountForm() {
 
   // queru
   const { isLoading , profile} = UseProfile();
-  console.log(profile)
+
   const { register, handleSubmit, control, formState, reset } =
     useForm<AccountFormFields>({
       mode: 'all',
@@ -130,11 +130,13 @@ export default function AccountForm() {
         <section>
           <SubmitButton
             label="Save Changes"
+            label2='Delete My Account'
             message={error}
             loading={formState.isSubmitting}
             disbale={formState.isValid}
             isPending={isPending}
             isAuth={false}
+            isprofile={true}
           />
         </section>
       </form>)}

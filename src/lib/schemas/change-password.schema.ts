@@ -1,35 +1,12 @@
 import z from 'zod';
+import { registerschema } from './register.schema';
 
-export const registerschema = z
-  .object({
-    firstName: z
+export const changepasswordschema = registerschema
+  .pick({ password: true, rePassword: true })
+  .extend({
+    oldPassword: z
       .string()
-      .nonempty(' your firstName is required')
-      .regex(/^[a-zA-Z]+$/, 'Only letters allowed'),
-    lastName: z
-      .string()
-      .nonempty(' your lastName is required')
-      .regex(/^[a-zA-Z]+$/, 'Only letters allowed'),
-    username: z
-      .string()
-      .min(3, 'length must be at least 3 characters')
-      .nonempty(' your name is required')
-      .regex(
-        /^[A-Za-z]+(?:\s[A-Za-z]+){0,2}$/,
-        'Only letters and single spaces allowed',
-      ),
-    email: z.string().nonempty(' your email is required'),
-    phone: z
-      .string()
-      .nonempty(' your phone is required')
-      .regex(
-        /^(\+2010|\+0|\+2011|\+2012|\+2015|010|011|012|015)\d{8}$/,
-        'Invalid Egyptian phone number',
-      ),
-
-    password: z
-      .string()
-      .nonempty(' your password is required')
+      .nonempty(' your  Password is required')
       .superRefine((value, ctx) => {
         if (value.length < 8) {
           ctx.addIssue({
@@ -62,12 +39,11 @@ export const registerschema = z
           });
         }
       }),
-
-    rePassword: z.string().nonempty(' your Confirm Password is required'),
   })
+
   .refine((data) => data.password === data.rePassword, {
     message: 'Passwords do not match',
     path: ['rePassword'],
   });
 
-export type RegisterFormFields = z.infer<typeof registerschema>;
+export type ChangePasswordFormFields = z.infer<typeof changepasswordschema>;
