@@ -130,11 +130,13 @@ export default function AccountForm() {
         <section>
           <SubmitButton
             label="Save Changes"
+            label2='Delete My Account'
             message={error}
             loading={formState.isSubmitting}
             disbale={formState.isValid}
             isPending={isPending}
             isAuth={false}
+            isprofile={true}
           />
         </section>
       </form>)}

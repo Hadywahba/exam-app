@@ -12,7 +12,7 @@ import PasswordField from '@/components/features/auth-fields/password-field';
 
 export default function ChangePasswordForm() {
   const { changePassword, error, isPending } = UseChange();
-  const { register, handleSubmit, formState , reset } =
+  const { register, handleSubmit, formState, reset } =
     useForm<ChangePasswordFormFields>({
       mode: 'all',
       resolver: zodResolver(changepasswordschema),
@@ -22,11 +22,11 @@ export default function ChangePasswordForm() {
         rePassword: '',
       },
     });
-  const onsubmit:SubmitHandler<ChangePasswordFormFields> = async(data) => {
-    changePassword(data,{
-      onSuccess:()=>{
-        reset()
-      }
+  const onsubmit: SubmitHandler<ChangePasswordFormFields> = async (data) => {
+    changePassword(data, {
+      onSuccess: () => {
+        reset();
+      },
     });
   };
   return (
@@ -55,7 +55,7 @@ export default function ChangePasswordForm() {
             placeholder="enter your New Password"
           />
         </section>
-      {/*confirm  New password section */}
+        {/*confirm  New password section */}
         <section className="w-full">
           <PasswordField
             register={register}
@@ -74,6 +74,7 @@ export default function ChangePasswordForm() {
             disbale={formState.isValid}
             isPending={isPending}
             isAuth={false}
+            isprofile={false}
           />
         </section>
       </form>

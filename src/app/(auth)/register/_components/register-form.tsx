@@ -14,12 +14,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import SubmitButton from '@/components/features/auth-fields/submit-button';
 import { UseRegister } from '../_hooks/use-register';
 
-
 export default function RegisterForm() {
   // Mutations
-  const {error , isPending , registerForm} =UseRegister()
+  const { error, isPending, registerForm } = UseRegister();
 
-  const { register, handleSubmit, control, formState} =
+  const { register, handleSubmit, control, formState } =
     useForm<RegisterFormFields>({
       mode: 'all',
       resolver: zodResolver(registerschema),
@@ -39,14 +38,12 @@ export default function RegisterForm() {
       ...data,
       phone: data.phone.replace(/^\+20/, '0'),
     };
-    registerForm(newData) 
+    registerForm(newData);
   };
   return (
     <main>
       <div className="flex flex-col justify-center gap-4 px-4">
-        <h1 className='pb-6 text-3xl font-bold font-inter'>
-          Create Account
-        </h1>
+        <h1 className="pb-6 font-inter text-3xl font-bold">Create Account</h1>
         <form
           onSubmit={handleSubmit(onsubmit)}
           className="flex flex-col justify-center gap-4"
@@ -132,7 +129,6 @@ export default function RegisterForm() {
               placeholder="enter your rePassword"
             />
           </section>
-      
 
           {/* button */}
           <section>
@@ -142,10 +138,11 @@ export default function RegisterForm() {
               loading={formState.isSubmitting}
               disbale={formState.isValid}
               isPending={isPending}
-              text=' Already have an account?'
-              textLink='Login'
-              link='/login'
+              text=" Already have an account?"
+              textLink="Login"
+              link="/login"
               isAuth={true}
+              isprofile={false}
             />
           </section>
         </form>

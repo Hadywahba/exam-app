@@ -28,7 +28,6 @@ export default function ResetPasswordForm() {
       },
     });
   const onsubmit: SubmitHandler<ResetPasswordFormFields> = async (data) => {
- 
     const payload: ResetPasswordPayload = {
       email: email!,
       newPassword: data.newPassword,
@@ -83,7 +82,8 @@ export default function ResetPasswordForm() {
             text="Don’t have an account?"
             textLink="Create yours"
             link="/register"
-             isAuth={true}
+            isAuth={true}
+            isprofile={false}
           />
         </section>
       </form>

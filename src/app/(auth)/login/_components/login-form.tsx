@@ -78,6 +78,7 @@ export default function LoginForm() {
             textLink="Create yours"
             link="/register"
              isAuth={true}
+              isprofile={false}
           />
         </section>
       </form>
