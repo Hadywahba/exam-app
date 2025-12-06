@@ -19,9 +19,8 @@ export const UseLogin = () => {
           new URLSearchParams(location.search).get('callbackUrl') || '/';
         return (location.href = callbackUrl);
       }
-
       if (payload?.error) {
-         throw new Error("Invalid email or password");
+        throw new Error('Invalid email or password');
       }
 
       return payload;

@@ -1,5 +1,5 @@
-import AuthBody from "@/components/layout/feature-name/auth-body";
-import AuthHeader from "@/components/layout/feature-name/auth-header";
+import AuthBody from "@/components/layout/auth/auth-body";
+import AuthHeader from "@/components/layout/auth/auth-header";
 import React from "react";
 
 export default function layout({
