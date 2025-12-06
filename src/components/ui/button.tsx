@@ -18,6 +18,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         phoneoutline:
           "border border-input text-gray-800 bg-transparent hover:bg-blue-100 ",
+          dot:'  text-gray-500 ',
       },
       size: {
         default: "h-11 px-4 py-6",

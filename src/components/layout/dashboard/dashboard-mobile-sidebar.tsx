@@ -1,10 +1,14 @@
 'use client';
 import { SidebarcolumnItems } from '@/lib/constants/dashboard-sidebar';
+import { signOut } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 
 export default function DashboardMobileSidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
   return (
     <>
       {/* Burger button */}
@@ -52,16 +56,45 @@ export default function DashboardMobileSidebar() {
           </svg>
         </button>
         <ul className="flex min-h-screen flex-col gap-6">
-          {SidebarcolumnItems.map((item) => (
-            <li
-              key={item.id}
-              className="w-full p-4 capitalize text-blue-100 hover:bg-blue-600"
-            >
-              <Link className="" href={item.link}>
-                {item.name}
-              </Link>
-            </li>
-          ))}
+          {SidebarcolumnItems.map((item) => {
+            const isActive = pathname === item.link;
+            return (
+              <li
+                key={item.id}
+                className={`flex w-full items-center justify-start gap-[0.625rem] p-4 capitalize ${isActive ? 'border-[.0625rem] border-blue-600 bg-blue-100' : ''}`}
+              >
+                {isActive ? (
+                  <Image
+                    src={item.activeImage}
+                    width={24}
+                    height={24}
+                    alt={item.alt}
+                  />
+                ) : (
+                  <Image
+                    src={item.image}
+                    width={24}
+                    height={24}
+                    alt={item.alt}
+                  />
+                )}
+                <Link
+                  className={`text-base font-normal ${isActive ? 'text-blue-600' : 'text-gray-500'} `}
+                  href={item.link}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            );
+          })}
+          <li onClick={()=>signOut()} className=' p-4 capitalize flex items-center justify-start gap-[0.625rem] text-gray-500 hover:text-blue-600 hover:bg-blue-100  hover:border-[.0625rem]'>
+             <Image
+                    src='/assets/icons/log-out.svg'
+                    width={24}
+                    height={24}
+                    alt='log-out'
+                  />
+            Logout</li>
         </ul>
       </nav>
     </>
