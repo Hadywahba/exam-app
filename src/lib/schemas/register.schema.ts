@@ -14,7 +14,10 @@ export const registerschema = z
       .string()
       .min(3, 'length must be at least 3 characters')
       .nonempty(' your name is required')
-      .regex(/^[a-zA-Z]+$/, 'Only letters allowed'),
+      .regex(
+        /^[A-Za-z]+(?:\s[A-Za-z]+){0,2}$/,
+        'Only letters and single spaces allowed',
+      ),
     email: z.string().nonempty(' your email is required'),
     phone: z
       .string()

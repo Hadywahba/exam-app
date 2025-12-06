@@ -1,5 +1,6 @@
 'use client';
 import { accountSidebarcolumnItems } from '@/lib/constants/account-sidebar';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -46,7 +47,10 @@ export default function AccountSidebar() {
           })}
         </ul>
       </nav>
-      <div className="flex w-[14.625rem] items-center gap-2 bg-red-50 py-[.625rem] pl-[1rem]">
+      <div
+        onClick={() => signOut()}
+        className="flex w-[14.625rem] cursor-pointer items-center gap-2 bg-red-50 py-[.625rem] pl-[1rem]"
+      >
         <Image
           src="/assets/icons/log-out.svg"
           width={24}
