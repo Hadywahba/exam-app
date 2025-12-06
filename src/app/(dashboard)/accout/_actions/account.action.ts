@@ -1,9 +1,9 @@
 'use server';
 import { EditProfileResponse } from '../_types/account';
 import { getToken } from '@/lib/utility/manage-token';
-import { AccountFormFields } from '@/lib/schemas/account.shcema';
+import { AccountFormFields } from '@/lib/schemas/account.schema';
 
-// Register is a service function that calls the backend
+// EditAccount is a service function that calls the backend
 export async function EditAccount(data: AccountFormFields) {
   const tokenObj = await getToken();
   const token = tokenObj?.accesstoken;

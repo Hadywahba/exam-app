@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
-import { AccountFormFields } from '@/lib/schemas/account.shcema';
+import { AccountFormFields } from '@/lib/schemas/account.schema';
 import { EditAccount } from '../_actions/account.action';
 
 export const UseAccount = () => {
