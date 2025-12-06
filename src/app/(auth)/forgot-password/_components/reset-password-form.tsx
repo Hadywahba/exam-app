@@ -83,6 +83,7 @@ export default function ResetPasswordForm() {
             text="Don’t have an account?"
             textLink="Create yours"
             link="/register"
+             isAuth={true}
           />
         </section>
       </form>

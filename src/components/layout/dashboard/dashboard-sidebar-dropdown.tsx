@@ -13,7 +13,6 @@ import { useRouter } from 'next/navigation';
 import { EllipsisVertical } from 'lucide-react';
 
 export function DashboardSidebarDropdown() {
-  // hook
   const router=useRouter() 
   return (
     <>

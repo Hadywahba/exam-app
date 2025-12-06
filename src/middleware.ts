@@ -7,7 +7,7 @@ const authRoutes = [
   '/forgot-password?step=1',
   '/forgot-password?step=2',
 ];
-const protectedRoutes = ['^/dashboard.*$', '/'];
+const protectedRoutes = ['^/dashboard.*$', '/' , '/accout' , '/accout/change-password' ];
 export default async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   const redirectUrl = new URL('/login', request.nextUrl.origin);

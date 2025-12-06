@@ -145,6 +145,7 @@ export default function RegisterForm() {
               text=' Already have an account?'
               textLink='Login'
               link='/login'
+              isAuth={true}
             />
           </section>
         </form>
