@@ -1,5 +1,5 @@
 'use client';
-import { SidebarcolumnItems } from '@/lib/constants/dashboard-sidebar';
+import { accountSidebarcolumnItems } from '@/lib/constants/account-sidebar';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 
 export default function DashboardMobileSidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+   const [diplomaOpen, setdiplomaOpen] = useState(false);
   const pathname = usePathname();
   return (
     <>
@@ -55,46 +57,111 @@ export default function DashboardMobileSidebar() {
             />
           </svg>
         </button>
-        <ul className="flex min-h-screen flex-col gap-6">
-          {SidebarcolumnItems.map((item) => {
-            const isActive = pathname === item.link;
-            return (
-              <li
-                key={item.id}
-                className={`flex w-full items-center justify-start gap-[0.625rem] p-4 capitalize ${isActive ? 'border-[.0625rem] border-blue-600 bg-blue-100' : ''}`}
-              >
-                {isActive ? (
-                  <Image
-                    src={item.activeImage}
-                    width={24}
-                    height={24}
-                    alt={item.alt}
-                  />
-                ) : (
-                  <Image
-                    src={item.image}
-                    width={24}
-                    height={24}
-                    alt={item.alt}
-                  />
-                )}
-                <Link
-                  className={`text-base font-normal ${isActive ? 'text-blue-600' : 'text-gray-500'} `}
-                  href={item.link}
+        <ul className="flex min-h-screen w-[220px] flex-col gap-2">
+          <li
+            className="flex w-full cursor-pointer items-center justify-between p-4 hover:bg-gray-100"
+            onClick={() => setAccountOpen(!accountOpen)}
+          >
+            <span className="text-base font-medium">Account Settings</span>
+            <svg
+              className={`h-4 w-4 transition-transform ${accountOpen ? 'rotate-180' : 'rotate-0'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </li>
+
+          {/* account Dropdown items */}
+          {accountOpen &&
+            accountSidebarcolumnItems.map((item) => {
+              const isActive = pathname === item.link;
+              return (
+                <li
+                  key={item.id}
+                  className={`flex w-full items-center gap-2 p-3 pl-6 capitalize ${
+                    isActive ? 'border border-blue-600 bg-blue-100' : ''
+                  }`}
                 >
-                  {item.name}
-                </Link>
-              </li>
-            );
-          })}
-          <li onClick={()=>signOut()} className=' p-4 capitalize flex items-center justify-start gap-[0.625rem] text-gray-500 hover:text-blue-600 hover:bg-blue-100  hover:border-[.0625rem]'>
-             <Image
-                    src='/assets/icons/log-out.svg'
+                  <Image
+                    src={isActive ? item.activeImage : item.image}
                     width={24}
                     height={24}
-                    alt='log-out'
+                    alt={item.alt}
                   />
-            Logout</li>
+                  <Link
+                    href={item.link}
+                    className={`text-base font-normal ${isActive ? 'text-blue-600' : 'text-gray-500'}`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
+               <li
+            className="flex w-full cursor-pointer items-center justify-between p-4 hover:bg-gray-100"
+            onClick={() => setdiplomaOpen(!diplomaOpen)}
+          >
+            <span className="text-base font-medium">Account Settings</span>
+            <svg
+              className={`h-4 w-4 transition-transform ${diplomaOpen ? 'rotate-180' : 'rotate-0'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </li>
+
+          {/* diploma Dropdown items */}
+          {diplomaOpen &&
+            accountSidebarcolumnItems.map((item) => {
+              const isActive = pathname === item.link;
+              return (
+                <li
+                  key={item.id}
+                  className={`flex w-full items-center gap-2 p-3 pl-6 capitalize ${
+                    isActive ? 'border border-blue-600 bg-blue-100' : ''
+                  }`}
+                >
+                  <Image
+                    src={isActive ? item.activeImage : item.image}
+                    width={24}
+                    height={24}
+                    alt={item.alt}
+                  />
+                  <Link
+                    href={item.link}
+                    className={`text-base font-normal ${isActive ? 'text-blue-600' : 'text-gray-500'}`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
+          <li
+            onClick={() => signOut()}
+            className="flex items-center justify-start gap-[0.625rem] p-4 capitalize text-gray-500 hover:border-[.0625rem] hover:bg-blue-100 hover:text-blue-600"
+          >
+            <Image
+              src="/assets/icons/log-out.svg"
+              width={24}
+              height={24}
+              alt="log-out"
+            />
+            Logout
+          </li>
         </ul>
       </nav>
     </>

@@ -1,9 +1,10 @@
 import React from 'react'
-
-export default function page() {
+import AccountForm from './_components/account-form'
+export default async function page() {
+ 
   return (
-    <div>
-      <h1>Account</h1>
-    </div>
+    <>
+    <AccountForm/>
+    </>
   )
 }
