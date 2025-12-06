@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/features/dashboard/bread-crumbs';
 import DashboardMobileSidebar from '@/components/layout/dashboard/dashboard-mobile-sidebar';
 import DashboardSidebar from '@/components/layout/dashboard/dashboard-sidebar';
 import React from 'react';
@@ -14,8 +15,14 @@ export default function layout({ children }: { children: React.ReactNode }) {
       <section className="absolute right-0 flex lg:hidden">
         <DashboardMobileSidebar />
       </section>
-      {/* children section */}
-      <div className="w-full"> {children}</div>
+    
+    <section className='flex flex-col w-full'>
+    <div className='bg-slate-400 w-full py-4 pl-4'>
+      <Breadcrumbs/>
+    </div>
+        {/* children section */}
+        <div className="w-full"> {children}</div>
+    </section>
     </main>
   );
 }
