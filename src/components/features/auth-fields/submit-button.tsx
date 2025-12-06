@@ -28,6 +28,7 @@ export default function SubmitButton({
       <SubmitError errors={message} />
       <div className="flex w-full flex-col items-center justify-center gap-9">
         <Button
+       
           variant="default"
           className="w-full"
           disabled={isPending || (!disbale && loading)}

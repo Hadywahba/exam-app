@@ -1,15 +1,14 @@
-'use client';
-import { SidebarcolumnItems } from '@/lib/constants/dashboard-sidebar';
 import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
+import React from 'react';
+import { DashboardSidebarDropdown } from './dashboard-sidebar-dropdown';
+import DashboardSidebarDetails from './dashboard-sidebar-details';
+import { getServerSession } from 'next-auth';
+import { authoption } from '@/auth';
 
-export default function DashboardSidebar() {
-  // hook
-  const pathname = usePathname();
+export default async function DashboardSidebar() {
+const userDate = await getServerSession(authoption)
   return (
-    <main className="flex min-h-screen flex-col gap-[3.75rem] px-10">
+    <main className="flex min-h-screen flex-col gap-[3rem] px-10">
       {/* picture section */}
       <div className="hidden w-[12rem] pt-10 lg:flex lg:flex-col">
         <Image
@@ -30,46 +29,19 @@ export default function DashboardSidebar() {
       </div>
       {/* details section */}
       <div className="flex flex-1 flex-col items-start justify-between pb-10">
-        <nav aria-label="sidebar menu" className="hidden lg:flex">
-          <ul className="flex flex-col items-start justify-center gap-[.625rem]">
-            {SidebarcolumnItems.map((item) => {
-              const isActive = pathname === item.link;
-              return (
-                <li
-                  key={item.id}
-                  className={`flex w-[17.625rem] items-center justify-start gap-[0.625rem] ${isActive ? 'border-[.0625rem] border-blue-600 bg-blue-100' : ''} py-[1.0938rem] pl-[1rem]`}
-                >
-                  {isActive ? (
-                    <Image
-                      src={item.activeImage}
-                      width={24}
-                      height={24}
-                      alt={item.alt}
-                    />
-                  ) : (
-                    <Image
-                      src={item.image}
-                      width={24}
-                      height={24}
-                      alt={item.alt}
-                    />
-                  )}
+        <DashboardSidebarDetails />
 
-                  <Link
-                    className={`text-base font-normal ${isActive ? 'text-blue-600' : 'text-gray-500'} `}
-                    href={item.link}
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-
-        <section>
-          <h1>Diplomas</h1>
-          <h1>Diplomas</h1>
+        <section className="flex w-[17.625rem] items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <h4 className="text-base font-medium text-blue-600">
+       {userDate?.user.username}
+            </h4>
+            <h5 className="text-sm font-normal text-gray-500">
+              {userDate?.user.email}
+         
+            </h5>
+          </div>
+          <DashboardSidebarDropdown />
         </section>
       </div>
     </main>

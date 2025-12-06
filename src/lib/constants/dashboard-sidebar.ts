@@ -5,8 +5,8 @@ const sidebarcolumnItems: Omit<SidebarMenu, 'id'>[] = [
   {
     name: 'Diplomas',
     link: '/',
-    image: 'assets/icons/graduation-cap-gray.svg',
-    activeImage: 'assets/icons/graduation-cap.svg',
+    image: '/assets/icons/graduation-cap-gray.svg',
+    activeImage: '/assets/icons/graduation-cap.svg',
     alt: 'graduation',
   },
   {
@@ -14,7 +14,7 @@ const sidebarcolumnItems: Omit<SidebarMenu, 'id'>[] = [
     link: '/accout',
     image: '/assets/icons/user-round.svg',
     activeImage: '/assets/icons/user-round-blue.svg',
-    alt: 'Settings',
+    alt: 'Account',
   },
 ];
 
