@@ -1,6 +1,5 @@
 import DashboardMobileSidebar from '@/components/layout/dashboard/dashboard-mobile-sidebar';
 import DashboardSidebar from '@/components/layout/dashboard/dashboard-sidebar';
-import { headers } from 'next/headers';
 import React from 'react';
 
 export default function layout({ children }: { children: React.ReactNode }) {
