@@ -12,19 +12,19 @@ export default function DiplomaCard({
   return (
     <Link href={'/exam'}>
     
-    <div className="flex justify-center items-center relative rounded-none">
+    <section className="flex justify-center items-center relative group" title={name}>
       <Image 
         src={icon} 
         width={334} 
         height={448} 
         alt={name} 
-        className="w-full h-[20.9375rem]  md:h-[28rem] object-cover rounded-none" 
+        className="w-full h-[20.9375rem]  md:h-[28rem] object-cover" 
       />
-      <div className='absolute bg-[#155DFC80] bottom-4 left-4 right-4 h-[4.1875rem] flex justify-start items-center'>
+      <div className=' opacity-0 group-hover:opacity-100 transition-opacity duration-500 absolute bg-[#155DFC80] bottom-3 left-3 right-3 h-[4.1875rem] flex justify-start items-center'>
         <h1 className='text-xl text-white font-semibold pl-4 w-[14.25rem]'>{name}</h1>
 
       </div>
-    </div>
+    </section>
     </Link>
   );
 }

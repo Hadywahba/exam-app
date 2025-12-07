@@ -4,7 +4,6 @@ import DiplomaCard from './_components/diploma-card';
 
 export default async function Home() {
   const { data, error } = await GetSubjects();
-  console.log(data);
   return (
     <main className="flex flex-col">
       {/* Header Section */}
