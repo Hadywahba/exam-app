@@ -30,7 +30,7 @@ export default function ChangePasswordForm() {
     });
   };
   return (
-    <div className="h-full bg-white px-6 pt-6">
+    <div className=" bg-white h-screen flex-1 px-6 py-6">
       <form
         onSubmit={handleSubmit(onsubmit)}
         className="flex flex-col justify-center gap-4"
@@ -65,6 +65,7 @@ export default function ChangePasswordForm() {
             placeholder="enter your New Password"
           />
         </section>
+        
 
         <section>
           <SubmitButton

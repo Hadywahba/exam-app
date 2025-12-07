@@ -13,12 +13,12 @@ export default function ContentExam({
 }) {
   return (
     <Link href={'/'}>
-    <section className="flex h-[5rem] items-center justify-between bg-blue-50 px-4 hover:bg-blue-100" title={title}>
+    <section className=" flex flex-col md:flex md:flex-row  h-[5rem] md:items-center md:justify-between bg-blue-50 px-4 hover:bg-blue-100" title={title}>
       {/* Left Part */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-semibold text-blue-600">{title}</h1>
+        <h1 className=" text-base sm:text-lg md:text-xl font-semibold text-blue-600">{title}</h1>
 
-        <p className="text-sm font-normal text-gray-500">
+        <p className="text-xs sm:text-sm font-normal text-gray-500">
           {numberOfQuestions} Questions{' '}
         </p>
       </div>
@@ -30,7 +30,7 @@ export default function ContentExam({
           height={24}
           alt="timer"
         />
-        <p className='text-gray-800 font-normal text-sm' >Duration: {duration} minutes </p>
+        <p className='text-gray-800 font-normal text-xs sm:text-sm' >Duration: {duration} minutes </p>
       </div>
 
     </section>

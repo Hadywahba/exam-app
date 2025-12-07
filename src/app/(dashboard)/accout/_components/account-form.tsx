@@ -58,7 +58,7 @@ export default function AccountForm() {
     });
   };
   return (
-    <main className="h-full bg-white px-6 pt-6">
+    <main className="h-screen flex-1 bg-white px-6 pt-6">
         {isLoading ? (<div className='flex justify-center items-center min-h-screen '>
         <Spinner color='text-blue-600'/>
         </div>) :(<form

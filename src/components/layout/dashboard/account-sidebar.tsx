@@ -10,7 +10,7 @@ export default function AccountSidebar() {
   // hook
   const pathname = usePathname();
   return (
-    <main className="mb-4 hidden flex-col justify-between bg-white px-4 py-6 lg:flex">
+    <main className=" hidden flex-col justify-between bg-white px-4 py-6 lg:flex">
       <nav aria-label="sidebar menu" className="">
         <ul className="flex flex-col items-start justify-around gap-[.625rem]">
           {accountSidebarcolumnItems.map((item) => {

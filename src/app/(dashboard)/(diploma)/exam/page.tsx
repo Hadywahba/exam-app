@@ -6,13 +6,13 @@ import { GetExamContent } from './_hooks/get-exam-content';
 export default async function page() {
   const { data, error } = await GetExamContent();
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col ">
       {/* Header Section */}
       <div>
         <ExamHeader />
       </div>
       {/* Content Section */}
-      <div className=" mt-5 bg-white h-screen px-6 pt-6 flex flex-col gap-4">
+      <div className=" mt-5 bg-white  h-[61.875rem]  px-6 pt-6 flex  flex-col gap-4 ">
         {data?.exams.map((items) => {
           return (
             <ContentExam
@@ -23,7 +23,7 @@ export default async function page() {
             />
           );
         })}
-        <section className='w-full py-3 '>
+        <section className='w-full py-3 bg-white'>
         <h4 className='text-gray-600  text-center mx-auto text-base'>End of list</h4>
     </section>
       </div>
