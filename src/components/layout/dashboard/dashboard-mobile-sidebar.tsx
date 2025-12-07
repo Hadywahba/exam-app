@@ -3,14 +3,19 @@ import { accountSidebarcolumnItems } from '@/lib/constants/account-sidebar';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 export default function DashboardMobileSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-   const [diplomaOpen, setdiplomaOpen] = useState(false);
+  const router = useRouter();
   const pathname = usePathname();
+  const gotoDiploma = () => {
+    router.push('/');
+  };
+  const isDiplomaActive = pathname === '/' || pathname.startsWith('/exam');
+
   return (
     <>
       {/* Burger button */}
@@ -58,6 +63,13 @@ export default function DashboardMobileSidebar() {
           </svg>
         </button>
         <ul className="flex min-h-screen w-[220px] flex-col gap-2">
+          {/* diploma  */}
+          <li
+            onClick={gotoDiploma}
+            className={`flex items-center justify-start gap-[0.625rem] p-4 capitalize hover:border-[.0625rem] hover:bg-blue-100 hover:text-blue-600 ${isDiplomaActive ? 'border px-4 border-blue-600 bg-blue-100 text-blue-600' : 'text-gray-500'} `}
+          >
+            Diplomas
+          </li>
           <li
             className="flex w-full cursor-pointer items-center justify-between p-4 hover:bg-gray-100"
             onClick={() => setAccountOpen(!accountOpen)}
@@ -77,7 +89,6 @@ export default function DashboardMobileSidebar() {
               />
             </svg>
           </li>
-
           {/* account Dropdown items */}
           {accountOpen &&
             accountSidebarcolumnItems.map((item) => {
@@ -86,7 +97,7 @@ export default function DashboardMobileSidebar() {
                 <li
                   key={item.id}
                   className={`flex w-full items-center gap-2 p-3 pl-6 capitalize ${
-                    isActive ? 'border border-blue-600 bg-blue-100' : ''
+                    isActive ? 'border border-blue-600 px-4 bg-blue-100' : ''
                   }`}
                 >
                   <Image
@@ -104,52 +115,7 @@ export default function DashboardMobileSidebar() {
                 </li>
               );
             })}
-               <li
-            className="flex w-full cursor-pointer items-center justify-between p-4 hover:bg-gray-100"
-            onClick={() => setdiplomaOpen(!diplomaOpen)}
-          >
-            <span className="text-base font-medium">Account Settings</span>
-            <svg
-              className={`h-4 w-4 transition-transform ${diplomaOpen ? 'rotate-180' : 'rotate-0'}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </li>
 
-          {/* diploma Dropdown items */}
-          {diplomaOpen &&
-            accountSidebarcolumnItems.map((item) => {
-              const isActive = pathname === item.link;
-              return (
-                <li
-                  key={item.id}
-                  className={`flex w-full items-center gap-2 p-3 pl-6 capitalize ${
-                    isActive ? 'border border-blue-600 bg-blue-100' : ''
-                  }`}
-                >
-                  <Image
-                    src={isActive ? item.activeImage : item.image}
-                    width={24}
-                    height={24}
-                    alt={item.alt}
-                  />
-                  <Link
-                    href={item.link}
-                    className={`text-base font-normal ${isActive ? 'text-blue-600' : 'text-gray-500'}`}
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              );
-            })}
           <li
             onClick={() => signOut()}
             className="flex items-center justify-start gap-[0.625rem] p-4 capitalize text-gray-500 hover:border-[.0625rem] hover:bg-blue-100 hover:text-blue-600"
