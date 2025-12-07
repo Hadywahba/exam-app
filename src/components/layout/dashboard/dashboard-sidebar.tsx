@@ -8,7 +8,7 @@ import { authoption } from '@/auth';
 export default async function DashboardSidebar() {
 const userDate = await getServerSession(authoption)
   return (
-    <main className="flex min-h-screen flex-col gap-[3rem] px-10">
+    <main className="flex  flex-col gap-[3rem] px-10">
       {/* picture section */}
       <div className="hidden w-[12rem] pt-10 lg:flex lg:flex-col">
         <Image
