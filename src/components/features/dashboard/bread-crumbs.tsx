@@ -1,49 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const segments = pathname
-    .split("/")
-    .filter((segment) => segment);
-
+  const title = searchParams.get("title");
+  const segments = pathname.split("/").filter(Boolean);
   const isHome = pathname === "/";
 
   return (
-    <nav className="text-sm flex items-center gap-1">
-      {/* HOME */}
+    <nav className="text-xs sm:text-sm flex items-center gap-[.125rem]">
       {isHome ? (
-        <span className="text-blue-600  font-normal text-sm">Home</span>   
+        <span className="text-blue-600 text-xs sm:text-sm">Home</span>
       ) : (
-        <Link href="/" className="text-gray-600 font-normal text-sm ">
+        <Link href="/" className="text-gray-600 text-xs sm:text-sm ">
           Home
         </Link>
       )}
 
-      {/* OTHER SEGMENTS */}
       {segments.map((segment, index) => {
         const fullPath = "/" + segments.slice(0, index + 1).join("/");
-        const isLast = index === segments.length - 1; 
+        const isLast = index === segments.length - 1;
+
+        // 👇 هنا التعديل المهم: لو الـ segment هو الـ ID → اعرض title بدل ID
+        const segmentLabel =
+          index === 1 && title ? title : segment.replace(/-/g, " ");
 
         return (
-          <span className="flex items-center gap-1" key={index}>
+          <span key={index} className="flex items-center gap-1">
             <span>/</span>
 
             {isLast ? (
-              // ACTIVE
-              <span className="text-blue-600 font-normal text-sm capitalize">
-                {segment.replace(/-/g, " ")}
+              <span className="text-blue-600 text-xs sm:text-sm capitalize">
+                {segmentLabel}
               </span>
             ) : (
-              // NOT ACTIVE 
               <Link
                 href={fullPath}
-                className="text-gray-600 font-normal text-sm  capitalize"
+                className="text-gray-600  text-xs sm:text-sm capitalize"
               >
-                {segment.replace(/-/g, " ")}
+                {segmentLabel}
               </Link>
             )}
           </span>

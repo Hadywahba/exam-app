@@ -1,32 +1,33 @@
 import ExamHeader from '@/components/features/dashboard/diplomas/exam-header';
-import React from 'react';
+import React, { Suspense } from 'react';
 import ContentExam from './_components/content-exam';
-import { GetExamContent } from './_hooks/get-exam-content';
+import Spinner from '@/components/loaders/Spinner';
 
 export default async function page() {
-  const { data, error } = await GetExamContent();
   return (
-    <main className="flex flex-col ">
+    <main className="flex flex-col">
       {/* Header Section */}
       <div>
         <ExamHeader />
       </div>
       {/* Content Section */}
-      <div className=" mt-5 bg-white  h-[61.875rem]  px-6 pt-6 flex  flex-col gap-4 ">
-        {data?.exams.map((items) => {
-          return (
-            <ContentExam
-              key={items._id}
-              title={items.title}
-              duration={items.duration}
-              numberOfQuestions={items.numberOfQuestions}
-            />
-          );
-        })}
-        <section className='w-full py-3 bg-white'>
-        <h4 className='text-gray-600  text-center mx-auto text-base'>End of list</h4>
-    </section>
-      </div>
+      <Suspense
+        fallback={
+          <div className="flex min-h-screen w-full items-center justify-center">
+            <Spinner color="text-blue-600" />
+          </div>
+        }
+      >
+        <div className="mt-5 flex h-[61.875rem] flex-col gap-4 bg-white px-6 pt-6">
+          <ContentExam />
+
+          <section className="w-full bg-white py-3">
+            <h4 className="mx-auto text-center text-base text-gray-600">
+              End of list
+            </h4>
+          </section>
+        </div>
+      </Suspense>
     </main>
   );
 }

@@ -6,9 +6,9 @@ import SubmitError from '@/components/error/submit-error';
 interface SubmitButtonProps {
   label: React.ReactNode;
   message: Error | null;
-  loading: boolean;
-  disbale: boolean;
-  isPending: boolean;
+  loading?: boolean;
+  disbale?: boolean;
+  isPending?: boolean;
   text?: string;
   textLink?: string;
   link?: string;
@@ -33,7 +33,7 @@ export default function SubmitButton({
     <div className="flex flex-col gap-6 pt-4">
       <SubmitError errors={message} />
       <div className="flex w-full flex-col items-center justify-center gap-9">
-        {isprofile ? (<div className='flex justify-center items-center gap-4 w-full'>
+        {isprofile ? (<div className=' flex flex-col sm:flex sm:flex-row sm:justify-center sm:items-center gap-4 w-full'>
             <Button
           variant="rose"
           className="w-full"

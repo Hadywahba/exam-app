@@ -19,7 +19,8 @@ const buttonVariants = cva(
         phoneoutline:
           "border border-input text-gray-800 bg-transparent hover:bg-blue-100 ",
           dot:'  text-gray-500 ',
-          rose:'bg-red-50 text-red-600  hover:bg-red-100'
+          rose:'bg-red-50 text-red-600  hover:bg-red-100',
+          answer:"bg-gray-50 hover:bg-gray-100 p-4 text-gray-800"
       },
       size: {
         default: "h-11 px-4 py-6",
