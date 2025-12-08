@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { GetExamContent } from '../_hooks/get-exam-content';
-
+import { Timer } from 'lucide-react';
 export default async function ContentExam() {
   const { data, error } = await GetExamContent();
   return (
@@ -31,12 +30,7 @@ export default async function ContentExam() {
             </div>
             {/* Right Part */}
             <div className="flex items-center gap-1">
-              <Image
-                src={'/assets/icons/timer.svg'}
-                width={24}
-                height={24}
-                alt="timer"
-              />
+               <Timer   className="text-gray-400 w-4 h-4 sm:w-6 sm:h-6" />
               <p className="text-xs font-normal text-gray-800 sm:text-sm">
                 Duration: {item.duration} minutes{' '}
               </p>

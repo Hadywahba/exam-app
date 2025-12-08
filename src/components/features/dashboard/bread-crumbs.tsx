@@ -12,11 +12,11 @@ export default function Breadcrumbs() {
   const isHome = pathname === "/";
 
   return (
-    <nav className="text-sm flex items-center gap-1">
+    <nav className="text-xs sm:text-sm flex items-center gap-[.125rem]">
       {isHome ? (
-        <span className="text-blue-600 font-normal text-sm">Home</span>
+        <span className="text-blue-600 text-xs sm:text-sm">Home</span>
       ) : (
-        <Link href="/" className="text-gray-600 font-normal text-sm">
+        <Link href="/" className="text-gray-600 text-xs sm:text-sm ">
           Home
         </Link>
       )}
@@ -34,13 +34,13 @@ export default function Breadcrumbs() {
             <span>/</span>
 
             {isLast ? (
-              <span className="text-blue-600 font-normal text-sm capitalize">
+              <span className="text-blue-600 text-xs sm:text-sm capitalize">
                 {segmentLabel}
               </span>
             ) : (
               <Link
                 href={fullPath}
-                className="text-gray-600 font-normal text-sm capitalize"
+                className="text-gray-600  text-xs sm:text-sm capitalize"
               >
                 {segmentLabel}
               </Link>

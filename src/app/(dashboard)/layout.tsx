@@ -12,8 +12,8 @@ export default function layout({ children }: { children: React.ReactNode }) {
       </section>
 
       <section className="flex w-full flex-col  ">
-        <div className="flex items-center justify-between h-[3.125rem] bg-white pr-4">
-          <div className="w-full   pl-4">
+        <div className="flex items-center justify-between h-[3.125rem] bg-white sm:pr-4 ">
+          <div className=" w-[300px] sm:w-full pl-2  sm:pl-4">
             <Breadcrumbs />
           </div>
           {/* sidebar on mobile */}
