@@ -6,9 +6,9 @@ import SubmitError from '@/components/error/submit-error';
 interface SubmitButtonProps {
   label: React.ReactNode;
   message: Error | null;
-  loading: boolean;
-  disbale: boolean;
-  isPending: boolean;
+  loading?: boolean;
+  disbale?: boolean;
+  isPending?: boolean;
   text?: string;
   textLink?: string;
   link?: string;
