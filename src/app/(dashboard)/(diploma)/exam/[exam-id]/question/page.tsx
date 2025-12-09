@@ -1,8 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import QuestionHeader from './_components/question-header';
 import QuestionContent from './_components/question-content';
 import { GetQuestions } from './_hooks/get-questions';
-import Spinner from '@/components/loaders/Spinner';
+
 import { AnswersProvider } from '@/components/providers/app/components/answer.provider';
 
 export default async function page({
@@ -16,25 +16,17 @@ export default async function page({
   console.log(data);
   const questions = data?.questions;
   return (
-  
-    <AnswersProvider examId={examId}  >
-    <main className="flex flex-col">
-      {(!questions || questions.length === 0) && (
-        <div className="flex items-center justify-center py-40">
-          <p className="w-full bg-white py-20 text-center text-2xl text-gray-800">
-            No questions found for this exam.
-          </p>
-        </div>
-      )}
-      {questions && questions.length > 0 && (
-        <>
-          <Suspense
-            fallback={
-              <div className="flex min-h-screen w-full items-center justify-center">
-                <Spinner color="text-blue-600" />
-              </div>
-            }
-          >
+    <AnswersProvider examId={examId}>
+      <main className="flex flex-col">
+        {(!questions || questions.length === 0) && (
+          <div className="flex items-center justify-center py-40">
+            <p className="w-full bg-white py-20 text-center text-2xl text-gray-800">
+              No questions found for this exam.
+            </p>
+          </div>
+        )}
+        {questions && questions.length > 0 && (
+          <>
             {/* question header */}
             <div>
               <QuestionHeader examTitle={String(questions[0].exam.title)} />
@@ -49,10 +41,9 @@ export default async function page({
                 examId={examId}
               />
             </div>
-          </Suspense>
-        </>
-      )}
-    </main>
+          </>
+        )}
+      </main>
     </AnswersProvider>
   );
 }
