@@ -3,7 +3,7 @@ import React from 'react';
 import { GetExamContent } from '../_hooks/get-exam-content';
 import { Timer } from 'lucide-react';
 export default async function ContentExam() {
-  const { data, error } = await GetExamContent();
+  const { data } = await GetExamContent();
   return (
     <>
       {data?.exams.map((item) => (

@@ -1,18 +1,12 @@
 'use client';
-import { useTimer } from '@/hooks/use-timer';
-import { getSeconds } from '@/lib/utility/convert-minutes-second';
 import React from 'react';
+export default function QuestionTimer({ usedTime , totalTime }: { usedTime: number , totalTime: number}) {
 
-export default function QuestionTimer({ duration }: { duration: number }) {
-    // convert minutes from api to seconds
-  const seconds=getSeconds(duration)
-  // hook
-  const { timeLeft } = useTimer({ initialSeconds: seconds });
 
   // Variables
   const radius = 29;
   const circumference = 2 * Math.PI * radius;
-  const progress = (timeLeft / seconds) * circumference;
+  const progress = (usedTime / totalTime) * circumference;
 
 
 
@@ -47,7 +41,7 @@ export default function QuestionTimer({ duration }: { duration: number }) {
 
       {/* Time Text */}
       <span className="absolute text-sm font-semibold text-black">
-        {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
+        {Math.floor(usedTime / 60)}:{String(usedTime % 60).padStart(2, '0')}
       </span>
     </div>
   );

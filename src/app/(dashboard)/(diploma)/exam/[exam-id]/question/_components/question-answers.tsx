@@ -1,36 +1,39 @@
 'use client';
-import React, { useState } from 'react';
+import { useAnswers } from '@/components/providers/app/components/answer.provider';
+import { Button } from '@/components/ui/button';
+import React from 'react';
 
-export default function QuestionAnswers() {
-  const [value, setValue] = useState('option-one');
+export default function QuestionAnswers({
+  questionId,
+  answer,
+  anserKey,
+}: {
+  questionId: string;
+  answer: string;
+  anserKey: string;
+}) {
+  // hook
+  const { selectedAnswers, handleAnswer } = useAnswers();
 
-  const options = [
-    { id: 'option-one', label: 'Option One' },
-    { id: 'option-two', label: 'Option Two' },
-    { id: 'option-three', label: 'Option Three' },
-    { id: 'option-four', label: 'Option Four' },
-  ];
+  // show your current select answer
+  const currentAnswer = selectedAnswers.find(
+    (a) => a.questionId === questionId,
+  )?.correct;
 
   return (
-    <form>
-      <div className="space-y-2">
-        {options.map((option) => (
-          <div
-            key={option.id}
-            onClick={() => setValue(option.id)}
-            className={`flex cursor-pointer items-center space-x-2   p-4 ${value === option.id ? 'bg-blue-100' : 'bg-gray-50  hover:bg-gray-100'} `}
-          >
-            <div
-              className={`flex h-6 w-6 items-center justify-center rounded-full border-2 ${value === option.id ? "border-blue-600" :" border-gray-400"}  `}
-            >
-              {value === option.id && (
-                <div className="h-3 w-3 rounded-full bg-blue-500" />
-              )}
-            </div>
-            <span>{option.label}</span>
-          </div>
-        ))}
-      </div>
-    </form>
+    <Button
+      onClick={() => handleAnswer(questionId, anserKey)}
+      variant={'answer'}
+      className={`flex items-center justify-start text-sm font-normal hover:bg-gray-100`}
+    >
+      <span
+        className={`flex h-5 w-5 items-center justify-center rounded-full border ${currentAnswer === anserKey ? 'bg-bg-white border-[.0625rem] border-blue-600' : 'border-gray-400'}`}
+      >
+        {currentAnswer === anserKey && (
+          <span className="h-3 w-3 rounded-full bg-blue-600" />
+        )}
+      </span>
+      {answer}
+    </Button>
   );
 }
