@@ -3,6 +3,7 @@ import QuestionHeader from './_components/question-header';
 import QuestionContent from './_components/question-content';
 import { GetQuestions } from './_hooks/get-questions';
 import Spinner from '@/components/loaders/Spinner';
+import { AnswersProvider } from '@/components/providers/app/components/answer.provider';
 
 export default async function page({
   params,
@@ -15,6 +16,8 @@ export default async function page({
   console.log(data);
   const questions = data?.questions;
   return (
+  
+    <AnswersProvider examId={examId}  >
     <main className="flex flex-col">
       {(!questions || questions.length === 0) && (
         <div className="flex items-center justify-center py-40">
@@ -38,17 +41,18 @@ export default async function page({
             </div>
             {/* question content */}
 
-            <div className="mt-5 flex h-auto flex-col gap-4 bg-white px-6 pt-6 sm:h-[32.7625rem]">
+            <div className="mt-5 flex flex-col gap-4 bg-white px-6 pt-6">
               <QuestionContent
                 title={questions[0].exam.title}
                 duration={questions[0].exam.duration}
                 question={data}
-                
+                examId={examId}
               />
             </div>
           </Suspense>
         </>
       )}
     </main>
+    </AnswersProvider>
   );
 }
