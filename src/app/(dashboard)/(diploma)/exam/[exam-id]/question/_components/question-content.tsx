@@ -54,7 +54,7 @@ export default function QuestionContent({
     stop();
     resetAnswers();
     router.push(
-      `/exam/${Id}/question/answer-question?title=${encodeURIComponent(title)}`,
+      `/exam/${Id}/question/question-answer?title=${encodeURIComponent(title)}`,
     );
     setInterval(() => {
       localStorage.removeItem(`currentQuestion_${title}`);
