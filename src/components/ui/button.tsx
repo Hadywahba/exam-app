@@ -13,7 +13,7 @@ const buttonVariants = cva(
         destructive: "bg-red-600 text-white  hover:bg-red-700",
         outline:
           "border border-[0.07rem] border-blue-600 text-gray-800 bg-blue-50 hover:bg-blue-100 ",
-        secondary: "bg-gray-200  text-gray-800  hover:bg-gray-900",
+        secondary: "bg-gray-200  text-gray-800  hover:bg-gray-300",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         phoneoutline:

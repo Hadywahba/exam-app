@@ -1,6 +1,6 @@
 'use client';
 import { Progress } from '@/components/ui/progress';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import QuestionAnswers from './question-answers';
 import { ChevronLeft } from 'lucide-react';
 import { ChevronRight } from 'lucide-react';
@@ -26,25 +26,24 @@ export default function QuestionContent({
   question: ExamQuestionsResponse;
   examId: string;
 }) {
-  // STATE
-  const { selectedAnswers, resetAnswers } = useAnswers();
-  // hook
+  // Constant
+  const totalTime = duration * 60;
+
+  // Hooks
   const router = useRouter();
   const params = useParams();
   const Id = params['exam-id'];
   const { Ans, error, isPending } = UseQuestionAnswers();
+  const { selectedAnswers, resetAnswers } = useAnswers();
   const { usedTime, stop, timeToken, start, reset } = UseExamTimer(
     examId,
-    duration * 60,
+    totalTime,
   );
   const { current, goToNext, goToPrevious, progress, setCurrent } =
     UseNavigation(question?.questions?.length, title);
-  useEffect(() => {
-    stop();
-    start();
-  }, [start, stop]);
 
-  const onsubmit = () => {
+  /** it used to send questions answer to api */
+  const onsubmit = useCallback(() => {
     const payload = {
       answers: selectedAnswers,
       time: timeToken,
@@ -53,15 +52,38 @@ export default function QuestionContent({
     reset();
     stop();
     resetAnswers();
-    router.push(
-      `/exam/${Id}/question/question-answer?title=${encodeURIComponent(title)}`,
-    );
+    router.push(`/exam/${Id}/question/question-answer?title=${title}`);
     setInterval(() => {
       localStorage.removeItem(`currentQuestion_${title}`);
       setCurrent(0);
     }, 2000);
-  };
+  }, [
+    selectedAnswers,
+    timeToken,
+    Ans,
+    reset,
+    stop,
+    resetAnswers,
+    router,
+    Id,
+    title,
+    setCurrent,
+  ]);
 
+  // Effect
+  /** it used to start exam time */
+  useEffect(() => {
+    stop();
+    start();
+  }, [start, stop]);
+
+  /** it used to submit exam after the time has ended */
+  useEffect(() => {
+    if (usedTime <= 0) {
+      onsubmit();
+    }
+  }, [usedTime, onsubmit]);
+  
   return (
     <main className="flex flex-col gap-4">
       {/* header */}
@@ -70,8 +92,10 @@ export default function QuestionContent({
           <p className="text-xs font-normal text-gray-500 sm:text-sm">
             Frontend Development - {title}
           </p>
-          <p className="text-xs font-normal text-gray-500 sm:text-sm">
-            Question {current + 1} of {question?.questions?.length}
+          <p className={`text-xs font-normal text-gray-500 sm:text-sm`}>
+            Question{' '}
+            <span className="font-semibold text-blue-600">{current + 1}</span>{' '}
+            of {question?.questions?.length}
           </p>
         </div>
         <Progress value={progress} />
@@ -109,7 +133,7 @@ export default function QuestionContent({
         </Button>
         {/* center part */}
         <div className="order-1 mx-auto sm:order-2">
-          <QuestionTimer usedTime={usedTime} totalTime={duration * 60} />
+          <QuestionTimer usedTime={usedTime} totalTime={totalTime} />
         </div>
         {/* left part */}
         <Button
