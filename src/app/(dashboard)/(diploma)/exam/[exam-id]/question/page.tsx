@@ -13,10 +13,9 @@ export default async function page({
   const examId = params['exam-id'];
 
   const { data } = await GetQuestions(examId);
-  console.log(data);
   const questions = data?.questions;
   return (
-    <AnswersProvider examId={examId}>
+    <AnswersProvider examId={examId} questions={questions!}>
       <main className="flex flex-col">
         {(!questions || questions.length === 0) && (
           <div className="flex items-center justify-center py-40">

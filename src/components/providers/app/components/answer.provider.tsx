@@ -2,12 +2,10 @@
 import { Answers } from '@/app/(dashboard)/(diploma)/exam/[exam-id]/question/_types/answer';
 import { createContext, useState, ReactNode, useContext } from 'react';
 
-
-
 type AnswersContextType = {
   selectedAnswers: Answers[];
   handleAnswer: (questionId: string, selected: string) => void;
-  resetAnswers:()=>void;
+  resetAnswers: () => void;
 };
 
 export const AnswersContext = createContext<AnswersContextType | undefined>(
@@ -17,15 +15,22 @@ export const AnswersContext = createContext<AnswersContextType | undefined>(
 export const AnswersProvider = ({
   children,
   examId,
+  questions,
 }: {
   children: ReactNode;
   examId: string;
+  questions: { _id: string }[];
 }) => {
   const AnswerKey = `questionAnswers-${examId}`;
   const [selectedAnswers, setSelectedAnswers] = useState<Answers[]>(() => {
     const savedAnswer = localStorage.getItem(AnswerKey);
-    // convert from string to array
-    return savedAnswer ? JSON.parse(savedAnswer) : [];
+    if (savedAnswer) return JSON.parse(savedAnswer);
+    const defaultAnswer = questions.map((ques) => ({
+      questionId: ques._id,
+      correct: 'c',
+    }));
+    localStorage.setItem(AnswerKey, JSON.stringify(defaultAnswer));
+    return defaultAnswer;
   });
 
   const handleAnswer = (questionId: string, selected: string) => {
@@ -40,13 +45,15 @@ export const AnswersProvider = ({
     });
   };
   // reset answers After submiting to start new exam
-const resetAnswers = () => {
-  setSelectedAnswers([]);
-  localStorage.removeItem(AnswerKey);
-};
+  const resetAnswers = () => {
+    setSelectedAnswers([]);
+    localStorage.removeItem(AnswerKey);
+  };
 
   return (
-    <AnswersContext.Provider value={{ selectedAnswers, handleAnswer ,resetAnswers }}>
+    <AnswersContext.Provider
+      value={{ selectedAnswers, handleAnswer, resetAnswers }}
+    >
       {children}
     </AnswersContext.Provider>
   );

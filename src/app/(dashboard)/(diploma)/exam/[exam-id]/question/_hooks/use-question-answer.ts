@@ -1,8 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import { SendAnsewer } from '../_types/answer';
+import { QuestionsAnswerResponse, SendAnsewer } from '../_types/answer';
 import { QuestionsAnswers } from '../_action/answer.action';
+import { useContext } from 'react';
+import { CorrectAnswers } from '@/components/providers/app/components/correct-answer.provider';
 
 export const UseQuestionAnswers = () => {
+  // Context
+  const { answersState } = useContext(CorrectAnswers)!;
+  // Mutation 
   const {
     mutate: Ans,
     error,
@@ -17,8 +22,8 @@ export const UseQuestionAnswers = () => {
 
       return payload;
     },
-    onSuccess: (data: SendAnsewer) => {
-      console.log(data);
+    onSuccess: (data: QuestionsAnswerResponse) => {
+      answersState(data)
     },
   });
   return {
