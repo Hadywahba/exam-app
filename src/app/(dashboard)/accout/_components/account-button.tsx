@@ -1,10 +1,7 @@
 'use Client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
-
 import SubmitError from '@/components/error/submit-error';
-
-import DeleteModal from './delete-modal';
 
 interface SubmitButtonProps {
   label: React.ReactNode;
@@ -14,7 +11,7 @@ interface SubmitButtonProps {
   isPending?: boolean;
   isprofile: boolean;
   label2?: string;
-   setopenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setopenModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function AccountButton({
   label,
@@ -26,8 +23,6 @@ export default function AccountButton({
   label2,
   setopenModal,
 }: SubmitButtonProps) {
-
- 
   return (
     <>
       {/* Buttons */}
@@ -37,9 +32,9 @@ export default function AccountButton({
           {isprofile ? (
             <div className="flex w-full flex-col gap-4 sm:flex sm:flex-row sm:items-center sm:justify-center">
               <Button
-              type='button'
+                type="button"
                 onClick={() => {
-                  setopenModal(true);
+                  if (setopenModal) setopenModal(true);
                 }}
                 variant="rose"
                 className="w-full"
@@ -65,7 +60,6 @@ export default function AccountButton({
           )}
         </div>
       </div>
-     
     </>
   );
 }

@@ -75,6 +75,7 @@ export default function ChangePasswordForm() {
             disbale={formState.isValid}
             isPending={isPending}
             isprofile={false}
+            
           />
         </section>
       </form>

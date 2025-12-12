@@ -11,13 +11,11 @@ import { AccountFormFields, accountschema } from '@/lib/schemas/account.schema';
 import { UseProfile } from '../_hooks/use-profile';
 import Spinner from '@/components/loaders/Spinner';
 import AccountButton from './account-button';
-import { UseDeleteAccount } from '../_hooks/use-delete-account';
 import DeleteModal from './delete-modal';
 
 export default function AccountForm() {
   // Mutations
   const { error, isPending, account } = UseAccount();
-const {deleteError , deleteIsPending , deleteMe} =UseDeleteAccount()
   // queru
   const { isLoading, profile } = UseProfile();
 

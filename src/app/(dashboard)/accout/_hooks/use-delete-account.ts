@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { DeleteAccount } from '../change-password/_actions/delete-account.action';
 import { useToast } from '@/hooks/use-toast';
-import { useRouter } from 'next/navigation';
 
 export const UseDeleteAccount = () => {
   // Toast
