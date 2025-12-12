@@ -7,8 +7,8 @@ import {
   ChangePasswordFormFields,
   changepasswordschema,
 } from '@/lib/schemas/change-password.schema';
-import SubmitButton from '@/components/features/auth-fields/submit-button';
 import PasswordField from '@/components/features/auth-fields/password-field';
+import AccountButton from '../../_components/account-button';
 
 export default function ChangePasswordForm() {
   const { changePassword, error, isPending } = UseChange();
@@ -68,13 +68,12 @@ export default function ChangePasswordForm() {
         
 
         <section>
-          <SubmitButton
+          <AccountButton
             label="Update Password"
             message={error}
             loading={formState.isSubmitting}
             disbale={formState.isValid}
             isPending={isPending}
-            isAuth={false}
             isprofile={false}
           />
         </section>
