@@ -42,7 +42,7 @@ export default function ChangePasswordForm() {
             name="oldPassword"
             errors={formState.errors}
             label="Current Password"
-            placeholder="enter your Current Password"
+            placeholder="enter Password"
           />
         </section>
         {/* password section */}
@@ -52,7 +52,7 @@ export default function ChangePasswordForm() {
             name="password"
             errors={formState.errors}
             label="New Password"
-            placeholder="enter your New Password"
+            placeholder="enter New Password"
           />
         </section>
         {/*confirm  New password section */}
@@ -62,7 +62,7 @@ export default function ChangePasswordForm() {
             name="rePassword"
             errors={formState.errors}
             label="Confirm New Password"
-            placeholder="enter your New Password"
+            placeholder="enter New Password"
           />
         </section>
         
