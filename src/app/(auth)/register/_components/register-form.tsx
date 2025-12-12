@@ -42,14 +42,14 @@ export default function RegisterForm() {
   };
   return (
     <main>
-      <div className="flex flex-col justify-center gap-4 px-4">
+      <div className="flex flex-col gap-4 px-4">
         <h1 className="pb-6 font-inter text-3xl font-bold">Create Account</h1>
         <form
           onSubmit={handleSubmit(onsubmit)}
           className="flex flex-col justify-center gap-4"
         >
           {/* name section */}
-          <section className="flex w-full flex-col items-center justify-center gap-4 md:flex md:flex-row md:items-start md:justify-center">
+          <section className="flex w-full flex-col items-center  justify-center gap-4 md:flex md:flex-row md:items-start md:justify-center">
             <NameField
               register={register}
               name="firstName"

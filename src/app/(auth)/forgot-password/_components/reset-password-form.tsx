@@ -35,13 +35,13 @@ export default function ResetPasswordForm() {
     reset(payload);
   };
   return (
-    <main className="mx-auto flex min-h-screen w-full flex-col justify-center gap-2 px-6 pt-20 md:w-[70%] lg:w-[28.25rem] lg:px-0">
+    <main className="mx-auto flex h-screen  w-full flex-col justify-center gap-3 px-6 lg:h-full md:w-[70%] lg:w-[28.25rem] lg:px-0">
       {/* title section */}
       <div className="pb-6">
-        <h1 className="mb-2 font-inter text-3xl font-bold text-gray-800">
+        <h1 className="mb-2 font-inter text-xl sm:text-3xl font-bold text-gray-800">
           Create a New Password
         </h1>
-        <p className="text-base font-normal text-gray-500">
+        <p className=" text-sm sm:text-base font-normal text-gray-500">
           Create a new strong password for your account.
         </p>
       </div>

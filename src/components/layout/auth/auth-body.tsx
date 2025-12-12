@@ -5,7 +5,7 @@ import React from "react";
 
 export default function AuthBody() {
   return (
-    <main className="flex flex-col justify-center items-start gap-12">
+    <main className="flex flex-col justify-center h-[47rem] items-start gap-12">
         {/* auth body header */}
       <section>
         <h1 className='text-gray-800 text-3xl font-bold font-inter'>

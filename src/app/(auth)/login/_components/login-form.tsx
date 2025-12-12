@@ -32,7 +32,7 @@ export default function LoginForm() {
     });
   };
   return (
-    <main className="flex min-h-screen w-full flex-col justify-center gap-3 px-6 pt-20 md:w-[70%] lg:w-[28.25rem] lg:px-0">
+    <main className="flex w-full flex-col justify-center h-screen lg:h-full gap-3 px-6 md:w-[70%] lg:w-[28.25rem] lg:px-0">
       <h1 className="pb-6 text-start font-inter text-3xl font-bold">Login</h1>
       <form
         onSubmit={handleSubmit(onsubmit)}
@@ -77,8 +77,8 @@ export default function LoginForm() {
             text="Don’t have an account?"
             textLink="Create yours"
             link="/register"
-             isAuth={true}
-              isprofile={false}
+            isAuth={true}
+            isprofile={false}
           />
         </section>
       </form>

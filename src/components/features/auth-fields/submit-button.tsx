@@ -57,7 +57,7 @@ export default function SubmitButton({
         </Button>)}
       
         {isAuth && (
-          <p className="text-sm font-medium text-gray-500">
+          <p className=" text-xs sm:text-sm font-medium text-gray-500">
             {text}
             <Link
               href={String(link)}

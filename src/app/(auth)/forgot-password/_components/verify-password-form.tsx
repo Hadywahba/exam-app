@@ -33,28 +33,30 @@ export default function VerifyPasswordForm() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full flex-col justify-center gap-8 px-6 pt-20 md:w-[70%] lg:w-[28.25rem] lg:px-0">
+    <main className="mx-auto flex  w-full flex-col justify-center h-screen lg:h-full gap-3 px-6  md:w-[70%] lg:w-[28.25rem] lg:px-0">
       {/* back button section */}
 
-      <div className="flex h-[2.5rem] w-[2.5rem] items-center justify-center border-[0.0938rem] border-gray-200">
+     <section className='w-full'>
+       <div className="flex  h-[2.5rem] w-[2.5rem] items-center justify-center border-[0.0938rem] border-gray-200">
         <Link href={'/forgot-password?step=1'}>
           <MoveLeft size={24} />
         </Link>
       </div>
+     </section>
 
       {/* OTP section */}
-      <section className="w-full flex-col justify-center gap-3">
+      <section className="w-full flex-col justify-center gap-3 pt-9">
         {/* title */}
         <div className="pb-6">
-          <h1 className="mb-2 font-inter text-3xl font-bold text-gray-800">
+          <h1 className="mb-2 font-inter text-2xl sm:text-3xl font-bold text-gray-800">
             Verify OTP
           </h1>
-          <p className="text-base font-normal text-gray-500">
+          <p className="text-sm sm:text-base font-normal text-gray-500">
             Please enter the 6-digits code we have sent to:
           </p>
-          <p className="text-base font-normal">
-            {email}{' '}
-            <span className="text-base font-medium text-blue-600 underline">
+          <p className="text-sm sm:text-base font-normal">
+            {email}.{' '}
+            <span className="text-sm sm:text-base font-medium text-blue-600 underline">
               <Link href={'/forgot-password?step=1'}>Edit</Link>
             </span>
           </p>
