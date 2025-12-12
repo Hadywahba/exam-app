@@ -31,12 +31,12 @@ export default function ForgotPasswordForm() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full flex-col justify-center gap-3 px-6 pt-20 md:w-[70%] lg:w-[28.25rem] lg:px-0">
+    <main className="mx-auto flex  w-full flex-col justify-center h-screen lg:h-full gap-3 px-6  md:w-[70%] lg:w-[28.25rem] lg:px-0">
       <div className="pb-6">
-        <h1 className="mb-2 font-inter text-3xl font-bold text-gray-800">
+        <h1 className="mb-2 font-inter text-2xl sm:text-3xl font-bold text-gray-800">
           Forgot Password
         </h1>
-        <p className="text-base font-normal text-gray-500">
+        <p className=" text-sm sm:text-base font-normal text-gray-500">
           Don’t worry, we will help you recover your account.
         </p>
       </div>
