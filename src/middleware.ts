@@ -1,30 +1,29 @@
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
-const authRoutes = [
-  '/login',
-  '/register',
-  '/forgot-password',
-  '/forgot-password?step=1',
-  '/forgot-password?step=2',
-];
+const authRoutes = ['^/login$', '^/register$', '^/forgot-password(/.*)?$'];
 const protectedRoutes = [
-  '^/dashboard.*$',
-  '/',
-  '/accout',
-  '/accout/change-password',
-  '/exam',
+  '^/dashboard(/.*)?$',
+  '^/$',
+  '^/account(/.*)?$',
+  '^/exam(/.*)?$',
 ];
 export default async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   const redirectUrl = new URL('/login', request.nextUrl.origin);
   redirectUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
 
-  if (protectedRoutes.includes(request.nextUrl.pathname)) {
+  if (
+    protectedRoutes.some((route) =>
+      new RegExp(route).test(request.nextUrl.pathname),
+    )
+  ) {
     if (token) return NextResponse.next();
 
     return NextResponse.redirect(redirectUrl);
   }
-  if (authRoutes.includes(request.nextUrl.pathname)) {
+  if (
+    authRoutes.some((route) => new RegExp(route).test(request.nextUrl.pathname))
+  ) {
     if (!token) return NextResponse.next();
     return NextResponse.redirect(new URL('/', request.nextUrl.origin));
   }
