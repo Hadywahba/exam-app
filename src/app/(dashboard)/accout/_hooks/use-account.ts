@@ -4,7 +4,9 @@ import { AccountFormFields } from '@/lib/schemas/account.schema';
 import { EditAccount } from '../_actions/account.action';
 
 export const UseAccount = () => {
+  // Constant related to React-Query
   const queryClient = useQueryClient();
+  
   // Toast
   const { toast } = useToast();
 

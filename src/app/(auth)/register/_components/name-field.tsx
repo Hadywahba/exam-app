@@ -27,12 +27,17 @@ export default function NameField<T extends FieldValues>({
   return (
     <div className="flex w-full flex-col">
       <div className="grid w-full items-center gap-3">
+        {/* Label */}
         <Label htmlFor="picture" className="font-medium text-gray-800">
           {label}
         </Label>
+
+        {/* Input */}
         <Input {...register(name)} type="text" placeholder={placeholder} />
       </div>
-      <div className="">
+
+      {/* Error */}
+      <div>
         <ValidationError errors={errors} name={name} />
       </div>
     </div>

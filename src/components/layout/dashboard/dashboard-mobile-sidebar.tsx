@@ -7,15 +7,21 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 export default function DashboardMobileSidebar() {
+  // State
   const [isOpen, setIsOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
+
+  // Hook
   const router = useRouter();
   const pathname = usePathname();
+
+  //  Variable
+  const isDiplomaActive = pathname === '/' || pathname.startsWith('/exam');
+
+  // Function
   const gotoDiploma = () => {
     router.push('/');
   };
-  const isDiplomaActive = pathname === '/' || pathname.startsWith('/exam');
-
   return (
     <>
       {/* Burger button */}
@@ -38,6 +44,7 @@ export default function DashboardMobileSidebar() {
           />
         </svg>
       </button>
+      
       {/* Mobile sliding menu */}
       <nav
         aria-label="Mobile menu"
@@ -66,7 +73,7 @@ export default function DashboardMobileSidebar() {
           {/* diploma  */}
           <li
             onClick={gotoDiploma}
-            className={`flex items-center justify-start gap-[0.625rem] p-4 capitalize hover:border-[.0625rem] hover:bg-blue-100 hover:text-blue-600 ${isDiplomaActive ? 'border px-4 border-blue-600 bg-blue-100 text-blue-600' : 'text-gray-500'} `}
+            className={`flex items-center justify-start gap-[0.625rem] p-4 capitalize hover:border-[.0625rem] hover:bg-blue-100 hover:text-blue-600 ${isDiplomaActive ? 'border border-blue-600 bg-blue-100 px-4 text-blue-600' : 'text-gray-500'} `}
           >
             Diplomas
           </li>
@@ -97,7 +104,7 @@ export default function DashboardMobileSidebar() {
                 <li
                   key={item.id}
                   className={`flex w-full items-center gap-2 p-3 pl-6 capitalize ${
-                    isActive ? 'border border-blue-600 px-4 bg-blue-100' : ''
+                    isActive ? 'border border-blue-600 bg-blue-100 px-4' : ''
                   }`}
                 >
                   <Image

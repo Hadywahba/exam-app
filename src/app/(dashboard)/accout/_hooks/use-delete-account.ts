@@ -5,6 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 export const UseDeleteAccount = () => {
   // Toast
   const { toast } = useToast();
+  
   // Mutation
   const {
     mutate: deleteMe,

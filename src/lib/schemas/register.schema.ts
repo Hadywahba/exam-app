@@ -30,37 +30,18 @@ export const registerschema = z
     password: z
       .string()
       .nonempty(' your password is required')
-      .superRefine((value, ctx) => {
-        if (value.length < 8) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Password must be at least 8 characters',
-          });
-        }
-        if (!/[A-Z]/.test(value)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Password must contain at least one uppercase letter',
-          });
-        }
-        if (!/[a-z]/.test(value)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Password must contain one lowercase letter',
-          });
-        }
-        if (!/[0-9]/.test(value)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Password must contain one number',
-          });
-        }
-        if (!/[@$!%*?&]/.test(value)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Password must contain one special character',
-          });
-        }
+      .min(8, { message: 'Password must be at least 8 characters long.' })
+      .refine((password) => /[A-Z]/.test(password), {
+        message: 'Password must contain at least one uppercase letter.',
+      })
+      .refine((password) => /[a-z]/.test(password), {
+        message: 'Password must contain at least one lowercase letter.',
+      })
+      .refine((password) => /[0-9]/.test(password), {
+        message: 'Password must contain at least one number.',
+      })
+      .refine((password) => /[!@#$%^&*]/.test(password), {
+        message: 'Password must contain at least one special character.',
       }),
 
     rePassword: z.string().nonempty(' your Confirm Password is required'),

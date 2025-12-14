@@ -6,9 +6,10 @@ import { getServerSession } from 'next-auth';
 import { authoption } from '@/auth';
 
 export default async function DashboardSidebar() {
-const userDate = await getServerSession(authoption)
+  // Get data from Session
+  const userDate = await getServerSession(authoption);
   return (
-    <main className="flex  flex-col gap-[3rem] px-10">
+    <main className="flex flex-col gap-[3rem] px-10">
       {/* picture section */}
       <div className="hidden w-[12rem] pt-10 lg:flex lg:flex-col">
         <Image
@@ -16,6 +17,7 @@ const userDate = await getServerSession(authoption)
           width={192}
           height={37}
           alt="logo"
+          priority
         />
         <div className="flex items-center justify-start gap-2">
           <Image
@@ -34,11 +36,10 @@ const userDate = await getServerSession(authoption)
         <section className="flex w-[17.625rem] items-center justify-between">
           <div className="flex flex-col gap-1">
             <h4 className="text-base font-medium text-blue-600">
-       {userDate?.user.username}
+              {userDate?.user.username}
             </h4>
             <h5 className="text-sm font-normal text-gray-500">
               {userDate?.user.email}
-         
             </h5>
           </div>
           <DashboardSidebarDropdown />

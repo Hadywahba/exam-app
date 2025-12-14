@@ -12,7 +12,6 @@ export async function ChangePassword(data: ChangePasswordFormFields) {
     body: JSON.stringify(data),
     headers: {
       'Content-type': 'application/json',
-    //   Authorization: `Bearer ${token}`,
       token: token!,
     },
   });

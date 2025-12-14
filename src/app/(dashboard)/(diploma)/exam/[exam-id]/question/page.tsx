@@ -10,13 +10,19 @@ export default async function page({
 }: {
   params: { 'exam-id': string };
 }) {
+  // Get params
   const examId = params['exam-id'];
 
+  // Get Exam questions data from server
   const { data } = await GetQuestions(examId);
+
+  // Variables
   const questions = data?.questions;
+
   return (
     <AnswersProvider examId={examId} questions={questions!}>
       <main className="flex flex-col">
+        {/* No questions Part */}
         {(!questions || questions.length === 0) && (
           <div className="flex items-center justify-center py-40">
             <p className="w-full bg-white py-20 text-center text-2xl text-gray-800">
@@ -24,14 +30,15 @@ export default async function page({
             </p>
           </div>
         )}
+
         {questions && questions.length > 0 && (
           <>
             {/* question header */}
             <div>
               <QuestionHeader examTitle={String(questions[0].exam.title)} />
             </div>
-            {/* question content */}
 
+            {/* question content */}
             <div className="mt-5 flex flex-col gap-4 bg-white px-6 pt-6">
               <QuestionContent
                 title={questions[0].exam.title}

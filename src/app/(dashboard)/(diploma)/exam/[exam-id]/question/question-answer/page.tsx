@@ -8,10 +8,13 @@ export default async function page({
 }: {
   params: { 'exam-id': string };
 }) {
+  // Get params
   const examId = params['exam-id'];
 
+  // Get data from server
   const { data } = await GetQuestions(examId);
-  console.log(data);
+
+  // Variable
   const questions = data?.questions;
   return (
     <>

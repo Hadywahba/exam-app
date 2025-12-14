@@ -11,7 +11,10 @@ import PasswordField from '@/components/features/auth-fields/password-field';
 import AccountButton from '../../_components/account-button';
 
 export default function ChangePasswordForm() {
+  // Mutation
   const { changePassword, error, isPending } = UseChange();
+
+  // Form
   const { register, handleSubmit, formState, reset } =
     useForm<ChangePasswordFormFields>({
       mode: 'all',
@@ -22,6 +25,8 @@ export default function ChangePasswordForm() {
         rePassword: '',
       },
     });
+
+  // Function
   const onsubmit: SubmitHandler<ChangePasswordFormFields> = async (data) => {
     changePassword(data, {
       onSuccess: () => {
@@ -30,7 +35,7 @@ export default function ChangePasswordForm() {
     });
   };
   return (
-    <div className=" bg-white h-screen flex-1 px-6 py-6">
+    <div className="h-screen flex-1 bg-white px-6 py-6">
       <form
         onSubmit={handleSubmit(onsubmit)}
         className="flex flex-col justify-center gap-4"
@@ -42,9 +47,10 @@ export default function ChangePasswordForm() {
             name="oldPassword"
             errors={formState.errors}
             label="Current Password"
-            placeholder="enter your Current Password"
+            placeholder="enter Password"
           />
         </section>
+
         {/* password section */}
         <section className="w-full">
           <PasswordField
@@ -52,9 +58,10 @@ export default function ChangePasswordForm() {
             name="password"
             errors={formState.errors}
             label="New Password"
-            placeholder="enter your New Password"
+            placeholder="enter New Password"
           />
         </section>
+
         {/*confirm  New password section */}
         <section className="w-full">
           <PasswordField
@@ -62,11 +69,11 @@ export default function ChangePasswordForm() {
             name="rePassword"
             errors={formState.errors}
             label="Confirm New Password"
-            placeholder="enter your New Password"
+            placeholder="enter New Password"
           />
         </section>
-        
 
+        {/* Button */}
         <section>
           <AccountButton
             label="Update Password"
@@ -75,7 +82,6 @@ export default function ChangePasswordForm() {
             disbale={formState.isValid}
             isPending={isPending}
             isprofile={false}
-            
           />
         </section>
       </form>

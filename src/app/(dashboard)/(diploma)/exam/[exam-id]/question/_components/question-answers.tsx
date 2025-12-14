@@ -15,7 +15,7 @@ export default function QuestionAnswers({
   // hook
   const { selectedAnswers, handleAnswer } = useAnswers();
 
-  // show your current select answer
+  // Variable it used to show your current select answer
   const currentAnswer = selectedAnswers.find(
     (a) => a.questionId === questionId,
   )?.correct;
@@ -27,7 +27,7 @@ export default function QuestionAnswers({
       className={`flex items-center justify-start text-sm font-normal hover:bg-gray-100`}
     >
       <span
-        className={`flex h-5 w-5 items-center justify-center rounded-full border ${currentAnswer === anserKey ? 'bg-white border-[.0625rem] border-blue-600' : 'border-gray-400'}`}
+        className={`flex h-5 w-5 items-center justify-center rounded-full border ${currentAnswer === anserKey ? 'border-[.0625rem] border-blue-600 bg-white' : 'border-gray-400'}`}
       >
         {currentAnswer === anserKey && (
           <span className="h-3 w-3 rounded-full bg-blue-600" />

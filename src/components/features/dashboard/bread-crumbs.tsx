@@ -1,46 +1,47 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function Breadcrumbs() {
+  // Hooks
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const title = searchParams.get("title");
-  const segments = pathname.split("/").filter(Boolean);
-  const isHome = pathname === "/";
+  // Variable
+  const title = searchParams.get('title');
+  const segments = pathname.split('/').filter(Boolean);
+  const isHome = pathname === '/';
 
   return (
-    <nav className="text-xs sm:text-sm flex items-center gap-[.125rem]">
+    <nav className="flex items-center gap-[.125rem] text-xs sm:text-sm">
       {isHome ? (
-        <span className="text-blue-600 text-xs sm:text-sm">Home</span>
+        <span className="text-xs text-blue-600 sm:text-sm">Home</span>
       ) : (
-        <Link href="/" className="text-gray-600 text-xs sm:text-sm ">
+        <Link href="/" className="text-xs text-gray-600 sm:text-sm">
           Home
         </Link>
       )}
 
       {segments.map((segment, index) => {
-        const fullPath = "/" + segments.slice(0, index + 1).join("/");
+        const fullPath = '/' + segments.slice(0, index + 1).join('/');
         const isLast = index === segments.length - 1;
 
-        // 👇 هنا التعديل المهم: لو الـ segment هو الـ ID → اعرض title بدل ID
         const segmentLabel =
-          index === 1 && title ? title : segment.replace(/-/g, " ");
+          index === 1 && title ? title : segment.replace(/-/g, ' ');
 
         return (
           <span key={index} className="flex items-center gap-1">
             <span>/</span>
 
             {isLast ? (
-              <span className="text-blue-600 text-xs sm:text-sm capitalize">
+              <span className="text-xs capitalize text-blue-600 sm:text-sm">
                 {segmentLabel}
               </span>
             ) : (
               <Link
                 href={fullPath}
-                className="text-gray-600  text-xs sm:text-sm capitalize"
+                className="text-xs capitalize text-gray-600 sm:text-sm"
               >
                 {segmentLabel}
               </Link>

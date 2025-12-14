@@ -15,8 +15,7 @@ import { ResetPasswordPayload } from '../_types/reset';
 export default function ResetPasswordForm() {
   // Mutation
   const { reset, error, isPending } = UseResetPassword();
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email');
+
   //Form
   const { register, formState, handleSubmit } =
     useForm<ResetPasswordFormFields>({
@@ -27,6 +26,12 @@ export default function ResetPasswordForm() {
         rePassword: '',
       },
     });
+
+  // Variables
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email');
+
+  // Function
   const onsubmit: SubmitHandler<ResetPasswordFormFields> = async (data) => {
     const payload: ResetPasswordPayload = {
       email: email!,
@@ -35,17 +40,16 @@ export default function ResetPasswordForm() {
     reset(payload);
   };
   return (
-    <main className="mx-auto flex h-screen  w-full flex-col justify-center gap-3 px-6 lg:h-full md:w-[70%] lg:w-[28.25rem] lg:px-0">
+    <main className="mx-auto flex h-screen w-full flex-col justify-center gap-3 px-6 md:w-[70%] lg:h-full lg:w-[28.25rem] lg:px-0">
       {/* title section */}
       <div className="pb-6">
-        <h1 className="mb-2 font-inter text-xl sm:text-3xl font-bold text-gray-800">
+        <h1 className="mb-2 font-inter text-xl font-bold text-gray-800 sm:text-3xl">
           Create a New Password
         </h1>
-        <p className=" text-sm sm:text-base font-normal text-gray-500">
+        <p className="text-sm font-normal text-gray-500 sm:text-base">
           Create a new strong password for your account.
         </p>
       </div>
-      {/* form section  */}
       <form
         onSubmit={handleSubmit(onsubmit)}
         className="flex flex-col justify-center gap-4"
@@ -60,6 +64,7 @@ export default function ResetPasswordForm() {
             placeholder="enter your Password"
           />
         </section>
+
         {/*Confirm New Password  section */}
         <section className="w-full">
           <PasswordField
@@ -83,7 +88,6 @@ export default function ResetPasswordForm() {
             textLink="Create yours"
             link="/register"
             isAuth={true}
-            isprofile={false}
           />
         </section>
       </form>

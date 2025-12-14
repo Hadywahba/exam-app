@@ -9,8 +9,10 @@ import React from 'react';
 export default function AccountSidebar() {
   // hook
   const pathname = usePathname();
+
   return (
-    <main className=" hidden flex-col justify-between bg-white px-4 py-6 lg:flex">
+    <main className="hidden flex-col justify-between bg-white px-4 py-6 lg:flex">
+      {/* Nav for SideBar */}
       <nav aria-label="sidebar menu" className="">
         <ul className="flex flex-col items-start justify-around gap-[.625rem]">
           {accountSidebarcolumnItems.map((item) => {
@@ -47,6 +49,8 @@ export default function AccountSidebar() {
           })}
         </ul>
       </nav>
+
+      {/* SignOut Part */}
       <div
         onClick={() => signOut()}
         className="flex w-[14.625rem] cursor-pointer items-center gap-2 bg-red-50 py-[.625rem] pl-[1rem]"
