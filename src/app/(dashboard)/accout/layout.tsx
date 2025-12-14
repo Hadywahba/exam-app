@@ -9,6 +9,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
     <section>
           <AccountHeader />
     </section>
+    
     <section className='flex h-screen lg:gap-5 overflow-hidden '>
          {/*account sidebar */}
   <div className='flex lg:w-[17.625rem]'>

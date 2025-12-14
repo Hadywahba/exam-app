@@ -11,23 +11,34 @@ export default function AnswerChecked({
   // context
   const { answers } = useContext(CorrectAnswers)!;
 
+  // Variable it used to compare data came from (GetApi) and data saved it context
   const allData = question.questions.map((q) => {
+    // select correct questions
     const correct = answers?.correctQuestions.find((cq) => cq.QID === q._id);
+
+    // select Wrong questions
     const wrong = answers?.WrongQuestions.find((cq) => cq.QID === q._id);
+
+    // Select all type of answers (correct and wrong)
     const yourAnswerKey = wrong
       ? wrong.inCorrectAnswer
       : correct
         ? correct.correctAnswer
         : null;
 
+    // Select correct answers only
     const correctAnswerKey = wrong
       ? wrong.correctAnswer
       : correct
         ? correct.correctAnswer
         : null;
+
+    //check about all type of answers of one question
     const yourAnswerText = q.answers.find(
       (a) => a.key === yourAnswerKey,
     )?.answer;
+
+    // check about correct answer of one question
     const correctAnswerText = q.answers.find(
       (a) => a.key === correctAnswerKey,
     )?.answer;

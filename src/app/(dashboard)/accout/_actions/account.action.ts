@@ -7,7 +7,6 @@ import { AccountFormFields } from '@/lib/schemas/account.schema';
 export async function EditAccount(data: AccountFormFields) {
   const tokenObj = await getToken();
   const token = tokenObj?.accesstoken;
-  console.log(tokenObj);
   const response = await fetch(`${process.env.API}/auth/editProfile`, {
     method: 'PUT',
     body: JSON.stringify({

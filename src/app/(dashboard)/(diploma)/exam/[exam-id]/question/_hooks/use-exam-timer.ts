@@ -2,18 +2,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const UseExamTimer = (examid: string, initialSecond: number) => {
-  const timeInterval = useRef<NodeJS.Timeout | null>(null);
-  const time = useRef<number>(initialSecond);
+  // State
   const [usedTime, setusedTime] = useState(() => {
     const savedTime = localStorage.getItem(`exam-time-${examid}`);
     return savedTime ? Number(savedTime) : initialSecond;
   });
 
-  useEffect(() => {
-    time.current = usedTime;
-  }, [usedTime]);
+  // ref
+  const timeInterval = useRef<NodeJS.Timeout | null>(null);
+  const time = useRef<number>(initialSecond);
 
-  // start time
+  // Function start time
   const start = useCallback(() => {
     if (timeInterval.current) return;
 
@@ -28,7 +27,7 @@ export const UseExamTimer = (examid: string, initialSecond: number) => {
     }, 1000);
   }, [examid]);
 
-  // stop Time
+  // Function stop Time
   const stop = useCallback(() => {
     if (timeInterval.current) {
       clearInterval(timeInterval.current);
@@ -36,23 +35,27 @@ export const UseExamTimer = (examid: string, initialSecond: number) => {
     }
   }, []);
 
-  // reset
+  // Function reset
   const reset = useCallback(() => {
     stop();
     time.current = initialSecond;
     setusedTime(initialSecond);
     localStorage.setItem(`exam-time-${examid}`, String(time.current));
   }, [stop, initialSecond, examid]);
-  
-  // time Token
+
+  // Constant  time Token
   const timeToken = initialSecond - time.current;
 
-  // Cleanup
-useEffect(() => {
-  return () => {
-    if (timeInterval.current) clearInterval(timeInterval.current);
-  };
-}, []);
+  // Effect
+  useEffect(() => {
+    time.current = usedTime;
+  }, [usedTime]);
+
+  useEffect(() => {
+    return () => {
+      if (timeInterval.current) clearInterval(timeInterval.current);
+    };
+  }, []);
 
   return {
     start,

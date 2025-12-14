@@ -5,31 +5,34 @@ import { GetSubjects } from '../_hooks/get-subjects';
 import ListError from '@/components/error/list-error';
 
 export default async function DiplomaCard() {
-   const { data, error } = await GetSubjects();
+  // it used to get data from server
+  const { data, error } = await GetSubjects();
 
   return (
     <>
-    <ListError isError={!!error} message={error} >
-    {data?.subjects.map((item)=>(
-        <Link href={'/exam'} key={item._id}>
-    
-    <section className="flex justify-center items-center relative group" title={item.name}>
-      <Image 
-        src={item.icon} 
-        width={334} 
-        height={448} 
-        alt={item.name} 
-        className="w-full h-[20.9375rem]  md:h-[28rem] object-cover" 
-      />
-      <div className=' opacity-0 group-hover:opacity-100 transition-opacity duration-500 absolute bg-[#155DFC80] bottom-3 left-3 right-3 h-[4.1875rem] flex justify-start items-center'>
-        <h1 className='text-xl text-white font-semibold pl-4 w-[14.25rem]'>{item.name}</h1>
-
-      </div>
-    </section>
-    </Link>
-    ))}
-    </ListError>
+      <ListError isError={!!error} message={error}>
+        {data?.subjects.map((item) => (
+          <Link href={'/exam'} key={item._id}>
+            <section
+              className="group relative flex items-center justify-center"
+              title={item.name}
+            >
+              <Image
+                src={item.icon}
+                width={334}
+                height={448}
+                alt={item.name}
+                className="h-[20.9375rem] w-full object-cover md:h-[28rem]"
+              />
+              <div className="absolute bottom-3 left-3 right-3 flex h-[4.1875rem] items-center justify-start bg-[#155DFC80] opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                <h1 className="w-[14.25rem] pl-4 text-xl font-semibold text-white">
+                  {item.name}
+                </h1>
+              </div>
+            </section>
+          </Link>
+        ))}
+      </ListError>
     </>
-  
   );
 }

@@ -26,18 +26,24 @@ export default function PasswordField<T extends FieldValues>({
   label,
   placeholder,
 }: passwordFieldProps<T>) {
+  // State
   const [toggle, settoggle] = useState<boolean>(false);
+
+  // Function
   const HandleToggle = () => {
     settoggle(!toggle);
   };
   return (
     <>
       <div className="grid w-full items-center gap-3">
+        {/* Label */}
         <div>
           <Label htmlFor="picture" className="font-medium text-gray-800">
             {label}
           </Label>
         </div>
+
+        {/* Input */}
         <div className="relative">
           <Input
             {...register(name)}
@@ -59,6 +65,8 @@ export default function PasswordField<T extends FieldValues>({
           </div>
         </div>
       </div>
+
+      {/* Error */}
       <div>
         <ValidationError errors={errors} name={name} />
       </div>

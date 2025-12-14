@@ -12,6 +12,8 @@ import SubmitButton from '@/components/features/auth-fields/submit-button';
 export default function LoginForm() {
   // Mutation
   const { error, isPending, loginForm } = UseLogin();
+
+  // Form
   const { register, handleSubmit, formState, setError } =
     useForm<LoginFormFields>({
       mode: 'all',
@@ -22,6 +24,7 @@ export default function LoginForm() {
       },
     });
 
+  // Function it used to submit login data
   const onsubmit: SubmitHandler<LoginFormFields> = async (data) => {
     loginForm(data, {
       onError: (error) => {
@@ -31,8 +34,9 @@ export default function LoginForm() {
       },
     });
   };
+
   return (
-    <main className="flex w-full flex-col justify-center h-screen lg:h-full gap-3 px-6 md:w-[70%] lg:w-[28.25rem] lg:px-0">
+    <main className="flex h-screen w-full flex-col justify-center gap-3 px-6 md:w-[70%] lg:h-full lg:w-[28.25rem] lg:px-0">
       <h1 className="pb-6 text-start font-inter text-3xl font-bold">Login</h1>
       <form
         onSubmit={handleSubmit(onsubmit)}
@@ -59,6 +63,7 @@ export default function LoginForm() {
             placeholder="enter your Password"
           />
         </section>
+
         <Link
           href={'/forgot-password'}
           className="text-end text-sm font-medium text-blue-600"
@@ -78,7 +83,6 @@ export default function LoginForm() {
             textLink="Create yours"
             link="/register"
             isAuth={true}
-            isprofile={false}
           />
         </section>
       </form>

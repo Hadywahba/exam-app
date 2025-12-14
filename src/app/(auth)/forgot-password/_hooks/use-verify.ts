@@ -10,8 +10,11 @@ export const UseVeifiy = () => {
 
   // Toast
   const { toast } = useToast();
+
+  // Variable
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
+
   //   Mutation
   const {
     mutate: verifiy,

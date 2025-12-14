@@ -1,18 +1,13 @@
 import { useEffect, useState } from 'react';
 
 export const UseNavigation = (totalQuestion: number, title: string) => {
-  // to store current question and read it from localstorage
+  // State it used to store current question and read it from localstorage
   const [current, setCurrent] = useState<number>(() => {
     const savedQuestion = localStorage.getItem(`currentQuestion_${title}`);
     return savedQuestion ? Number(savedQuestion) : 0;
   });
-  // Save current in localstorage
 
-  useEffect(() => {
-    localStorage.setItem(`currentQuestion_${title}`, String(current));
-  }, [current, title]);
-
-  // Next question index
+  // Function Next question index
   const goToNext = () => {
     setCurrent((prev) => {
       const nextIndex = prev < totalQuestion - 1 ? prev + 1 : prev;
@@ -20,7 +15,7 @@ export const UseNavigation = (totalQuestion: number, title: string) => {
     });
   };
 
-  // Previous question index
+  // Function Previous question index
   const goToPrevious = () => {
     setCurrent((prev) => {
       const lastIndex = prev > 0 ? prev - 1 : prev;
@@ -28,7 +23,22 @@ export const UseNavigation = (totalQuestion: number, title: string) => {
     });
   };
 
-  // Prevent current from going out of range
+  // Function Start exam (reset to first question)
+  const goToExam = () => {
+    setCurrent(0);
+  };
+
+  // Variable Calculate progress
+  const progress =
+    totalQuestion > 0 ? ((current + 1) / totalQuestion) * 100 : 0;
+
+  // Effect
+  /** Save current in localstorage */
+  useEffect(() => {
+    localStorage.setItem(`currentQuestion_${title}`, String(current));
+  }, [current, title]);
+
+  /** Prevent current from going out of range*/
   useEffect(() => {
     if (totalQuestion > 0) {
       setCurrent((prev) => Math.min(prev, totalQuestion - 1));
@@ -36,15 +46,6 @@ export const UseNavigation = (totalQuestion: number, title: string) => {
       setCurrent(0);
     }
   }, [totalQuestion]);
-
-  // Start exam (reset to first question)
-  const goToExam = () => {
-    setCurrent(0);
-  };
-
-  // Calculate progress
-  const progress =
-    totalQuestion > 0 ? ((current + 1) / totalQuestion) * 100 : 0;
 
   return {
     goToNext,

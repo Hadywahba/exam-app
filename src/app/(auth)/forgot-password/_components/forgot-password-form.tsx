@@ -12,6 +12,7 @@ import {
 import { MoveRight } from 'lucide-react';
 import { UseForgot } from '../_hooks/use-forgot-password';
 export default function ForgotPasswordForm() {
+
   // Mutation
   const { error, isPending, forgot } = UseForgot({ redirect: true });
 
@@ -72,7 +73,6 @@ export default function ForgotPasswordForm() {
               textLink="Create yours"
               link="/register"
               isAuth={true}
-              isprofile={false}
             />
           </section>
         </form>

@@ -4,7 +4,9 @@ import { GetExamContent } from '../_hooks/get-exam-content';
 import { Timer } from 'lucide-react';
 import ListError from '@/components/error/list-error';
 export default async function ContentExam() {
+  // Get Exam data from server
   const { data, error } = await GetExamContent();
+  
   return (
     <>
       <ListError isError={!!error} message={error}>

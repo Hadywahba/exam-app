@@ -23,15 +23,15 @@ const InputOTPWithResendTimerDemo = ({
   onBlur,
   email,
 }: InputOTPWithResendTimerDemoProps) => {
+  // Toast
+  const { toast } = useToast();
+
   // Mutation
   const { forgot } = UseForgot({ redirect: false });
 
   //  hooks
   const id = useId();
   const { resetTimer, timeLeft } = useTimer({ initialSeconds: 60 });
-
-  // Toast
-  const { toast } = useToast();
 
   //  functions
   const resendOtp = () => {
@@ -52,6 +52,7 @@ const InputOTPWithResendTimerDemo = ({
 
   return (
     <div className="mx-auto flex flex-col items-center justify-center space-y-3">
+      {/* Input */}
       <div className="flex items-center justify-center gap-8">
         <InputOTP
           value={value}
@@ -67,6 +68,8 @@ const InputOTPWithResendTimerDemo = ({
           </InputOTPGroup>
         </InputOTP>
       </div>
+
+      {/* Timer */}
       <p
         className={`mx-auto py-6 text-center text-sm font-medium text-gray-500`}
       >

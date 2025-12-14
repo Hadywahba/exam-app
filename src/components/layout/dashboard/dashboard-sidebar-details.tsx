@@ -8,6 +8,7 @@ import React from 'react';
 export default function DashboardSidebarDetails() {
   // hook
   const pathname = usePathname();
+  
   return (
     <nav aria-label="sidebar menu" className="hidden lg:flex">
       <ul className="flex flex-col items-start justify-center gap-[.625rem]">

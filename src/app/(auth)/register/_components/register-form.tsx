@@ -18,6 +18,7 @@ export default function RegisterForm() {
   // Mutations
   const { error, isPending, registerForm } = UseRegister();
 
+  // Form
   const { register, handleSubmit, control, formState } =
     useForm<RegisterFormFields>({
       mode: 'all',
@@ -33,6 +34,7 @@ export default function RegisterForm() {
       },
     });
 
+  // Function it used to submit register data
   const onsubmit: SubmitHandler<RegisterFormFields> = async (data) => {
     const newData = {
       ...data,
@@ -49,7 +51,7 @@ export default function RegisterForm() {
           className="flex flex-col justify-center gap-4"
         >
           {/* name section */}
-          <section className="flex w-full flex-col items-center  justify-center gap-4 md:flex md:flex-row md:items-start md:justify-center">
+          <section className="flex w-full flex-col items-center justify-center gap-4 md:flex md:flex-row md:items-start md:justify-center">
             <NameField
               register={register}
               name="firstName"
@@ -65,6 +67,7 @@ export default function RegisterForm() {
               placeholder="enter your Last name"
             />
           </section>
+
           {/* user name section */}
           <section className="w-full">
             <NameField
@@ -75,6 +78,7 @@ export default function RegisterForm() {
               placeholder="enter your name"
             />
           </section>
+
           {/* email section */}
           <section className="w-full">
             <EmailField
@@ -85,12 +89,16 @@ export default function RegisterForm() {
               placeholder="enter your email"
             />
           </section>
+
           {/* phone section */}
           <section className="w-full">
             <div className="grid w-full items-center gap-2">
+              {/* Label */}
               <Label htmlFor="picture" className="font-medium text-gray-800">
                 Phone
               </Label>
+
+              {/* Controller */}
               <Controller
                 name="phone"
                 control={control}
@@ -102,6 +110,8 @@ export default function RegisterForm() {
                   />
                 )}
               />
+
+              {/* Error */}
               {formState.errors.phone && (
                 <div className="text-xs text-red-500">
                   {formState.errors.phone.message as string}
@@ -109,6 +119,7 @@ export default function RegisterForm() {
               )}
             </div>
           </section>
+
           {/* password section */}
           <section className="w-full">
             <PasswordField
@@ -119,6 +130,7 @@ export default function RegisterForm() {
               placeholder="enter your Password"
             />
           </section>
+
           {/*confirm  password section */}
           <section className="w-full">
             <PasswordField
@@ -142,7 +154,6 @@ export default function RegisterForm() {
               textLink="Login"
               link="/login"
               isAuth={true}
-              isprofile={false}
             />
           </section>
         </form>

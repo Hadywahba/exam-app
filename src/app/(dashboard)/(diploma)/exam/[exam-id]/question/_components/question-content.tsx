@@ -26,22 +26,35 @@ export default function QuestionContent({
   question: ExamQuestionsResponse;
   examId: string;
 }) {
+  //React Hooks
+  const router = useRouter();
+  const params = useParams();
+
+  // Get params
+  const Id = params['exam-id'];
+
+  // Context
+  const { selectedAnswers, resetAnswers } = useAnswers();
+
   // Constant
   const totalTime = duration * 60;
 
-  // Hooks
-  const router = useRouter();
-  const params = useParams();
-  const Id = params['exam-id'];
+  // Mutation
   const { Ans, error, isPending } = UseQuestionAnswers();
-  const { selectedAnswers, resetAnswers } = useAnswers();
+
+  //  Custom Hook
+  /** Time Hook for exam */
   const { usedTime, stop, timeToken, start, reset } = UseExamTimer(
     examId,
     totalTime,
   );
-  const { current, goToNext, goToPrevious, progress } =
-    UseNavigation(question?.questions?.length, title);
+  /** Navigation Hook for exam */
+  const { current, goToNext, goToPrevious, progress } = UseNavigation(
+    question?.questions?.length,
+    title,
+  );
 
+  // Function
   /** it used to send questions answer to api */
   const onsubmit = useCallback(() => {
     const payload = {
@@ -78,7 +91,7 @@ export default function QuestionContent({
       onsubmit();
     }
   }, [usedTime, onsubmit]);
-  
+
   return (
     <main className="flex flex-col gap-4">
       {/* header */}
@@ -95,12 +108,14 @@ export default function QuestionContent({
         </div>
         <Progress value={progress} />
       </section>
+
       {/* question */}
       <section className="pt-6">
         <h1 className="bg-white text-base font-semibold text-blue-600 sm:text-xl md:text-2xl">
           {question?.questions[current]?.question}
         </h1>
       </section>
+
       {/* answers */}
       <section className="flex flex-col gap-3">
         {question.questions[current].answers.map(
@@ -116,7 +131,8 @@ export default function QuestionContent({
           },
         )}
       </section>
-      {/* button */}
+
+      {/* Navigation button */}
       <section className="bg- flex w-full flex-col gap-4 pt-6 sm:flex sm:flex-row sm:items-center md:justify-center">
         {/* right part */}
         <Button
@@ -139,6 +155,7 @@ export default function QuestionContent({
           Next <ChevronRight size={18} />
         </Button>
       </section>
+
       {/* Submit button */}
       <section>
         {current >= question?.questions?.length - 1 && (

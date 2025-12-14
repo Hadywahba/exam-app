@@ -3,6 +3,7 @@ import { getProfile } from '@/lib/services/profile.service';
 import { ProfileResponse } from '@/app/(dashboard)/accout/_types/profile';
 
 export const UseProfile = () => {
+  // Query
   const {
     data: profile,
     isLoading,
