@@ -109,7 +109,6 @@ src/
 - **Authentication**: NextAuth.js
 - **Styling**: Tailwind CSS + shadcn/ui
 - **Forms**: React Hook Form + Zod validation
-- **Charts**: Recharts
 - **State Management**: React Context + TanStack Query
 - **TypeScript**: Full type safety
 
