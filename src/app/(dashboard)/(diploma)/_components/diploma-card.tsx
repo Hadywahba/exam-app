@@ -14,7 +14,7 @@ export default async function DiplomaCard() {
         {data?.subjects.map((item) => (
           <Link href={'/exam'} key={item._id}>
             <section
-              className="group relative flex items-center justify-center"
+              className="relative flex items-center justify-center"
               title={item.name}
             >
               <Image
@@ -24,7 +24,7 @@ export default async function DiplomaCard() {
                 alt={item.name}
                 className="h-[20.9375rem] w-full object-cover md:h-[28rem]"
               />
-              <div className="absolute bottom-3 left-3 right-3 flex h-[4.1875rem] items-center justify-start bg-[#155DFC80] opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+              <div className="absolute bottom-3 left-3 right-3 flex h-[4.1875rem] items-center justify-start bg-[#155DFC80] ">
                 <h1 className="w-[14.25rem] pl-4 text-xl font-semibold text-white">
                   {item.name}
                 </h1>

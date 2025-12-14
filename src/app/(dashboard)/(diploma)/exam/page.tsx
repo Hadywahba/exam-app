@@ -5,7 +5,7 @@ import Spinner from '@/components/loaders/Spinner';
 
 export default async function page() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col h-full">
       {/* Header Section */}
       <div>
         <ExamHeader />
@@ -14,7 +14,7 @@ export default async function page() {
       {/* Content Section */}
       <Suspense
         fallback={
-          <div className="flex min-h-screen w-full items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center">
             <Spinner color="text-blue-600" />
           </div>
         }
