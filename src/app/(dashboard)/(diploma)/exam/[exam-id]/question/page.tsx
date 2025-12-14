@@ -22,7 +22,7 @@ export default async function page({
   return (
     <AnswersProvider examId={examId} questions={questions!}>
       <main className="flex flex-col">
-        {/* No questions Part */}
+        {/* No question in subject */}
         {(!questions || questions.length === 0) && (
           <div className="flex items-center justify-center py-40">
             <p className="w-full bg-white py-20 text-center text-2xl text-gray-800">
@@ -30,15 +30,14 @@ export default async function page({
             </p>
           </div>
         )}
-
         {questions && questions.length > 0 && (
           <>
             {/* question header */}
             <div>
               <QuestionHeader examTitle={String(questions[0].exam.title)} />
             </div>
-
             {/* question content */}
+
             <div className="mt-5 flex flex-col gap-4 bg-white px-6 pt-6">
               <QuestionContent
                 title={questions[0].exam.title}
