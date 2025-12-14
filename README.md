@@ -23,7 +23,6 @@ Interactive components marked with `'use client'`:
 - **Forms** - User input handling and validation
 - **Interactive UI** - Modals, dropdowns, and dynamic content
 - **State Management** - React hooks and context providers
-- **Charts** - Data visualization with Recharts
 
 ## 🔐 Authentication
 
