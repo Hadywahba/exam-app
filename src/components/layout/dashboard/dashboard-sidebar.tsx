@@ -16,6 +16,7 @@ const userDate = await getServerSession(authoption)
           width={192}
           height={37}
           alt="logo"
+          priority
         />
         <div className="flex items-center justify-start gap-2">
           <Image

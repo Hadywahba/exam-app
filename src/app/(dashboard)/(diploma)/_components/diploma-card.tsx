@@ -2,11 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { GetSubjects } from '../_hooks/get-subjects';
+import ListError from '@/components/error/list-error';
 
 export default async function DiplomaCard() {
    const { data, error } = await GetSubjects();
+
   return (
     <>
+    <ListError isError={!!error} message={error} >
     {data?.subjects.map((item)=>(
         <Link href={'/exam'} key={item._id}>
     
@@ -25,7 +28,7 @@ export default async function DiplomaCard() {
     </section>
     </Link>
     ))}
-    
+    </ListError>
     </>
   
   );

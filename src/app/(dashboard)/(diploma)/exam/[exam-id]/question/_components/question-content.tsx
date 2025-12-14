@@ -39,7 +39,7 @@ export default function QuestionContent({
     examId,
     totalTime,
   );
-  const { current, goToNext, goToPrevious, progress, setCurrent } =
+  const { current, goToNext, goToPrevious, progress } =
     UseNavigation(question?.questions?.length, title);
 
   /** it used to send questions answer to api */
@@ -53,10 +53,6 @@ export default function QuestionContent({
     stop();
     resetAnswers();
     router.push(`/exam/${Id}/question/question-answer?title=${title}`);
-    setInterval(() => {
-      localStorage.removeItem(`currentQuestion_${title}`);
-      setCurrent(0);
-    }, 2000);
   }, [
     selectedAnswers,
     timeToken,
@@ -67,7 +63,6 @@ export default function QuestionContent({
     router,
     Id,
     title,
-    setCurrent,
   ]);
 
   // Effect
