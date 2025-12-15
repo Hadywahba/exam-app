@@ -1,4 +1,4 @@
-import { ProfileResponse } from '@/app/(dashboard)/accout/_types/profile';
+import { ProfileResponse } from '@/app/(dashboard)/account/_types/profile';
 
 export const getProfile = async () => {
   const response = await fetch('/api/profile', {
