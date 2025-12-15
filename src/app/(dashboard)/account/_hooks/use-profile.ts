@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProfile } from '@/lib/services/profile.service';
-import { ProfileResponse } from '@/app/(dashboard)/accout/_types/profile';
+import { ProfileResponse } from '@/app/(dashboard)/account/_types/profile';
 
 export const UseProfile = () => {
   // Query

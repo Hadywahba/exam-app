@@ -4,14 +4,14 @@ import { AccountSidebarMenu } from '../types/account-sidebar';
 const accountsidebarcolumnItems: Omit<AccountSidebarMenu, 'id'>[] = [
   {
     name: 'Profile',
-    link: '/accout',
+    link: '/account',
     image: '/assets/icons/circle-user-round-gray.svg',
     activeImage: '/assets/icons/circle-user-round-blue.svg',
-    alt: 'accout',
+    alt: 'account',
   },
   {
     name: 'Change Password',
-    link: '/accout/change-password',
+    link: '/account/change-password',
     image: '/assets/icons/lock-gray.svg',
     activeImage: '/assets/icons/lock-blue.svg',
     alt: 'change-password',

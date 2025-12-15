@@ -28,7 +28,7 @@ export function DashboardSidebarDropdown() {
         <DropdownMenuContent className="w-40" align="end">
           <DropdownMenuGroup>
             {/* Account part */}
-            <DropdownMenuItem onClick={() => router.push('/accout')}>
+            <DropdownMenuItem onClick={() => router.push('/account')}>
               <div className="flex items-center justify-center gap-2">
                 <Image
                   src="/assets/icons/user-round.svg"

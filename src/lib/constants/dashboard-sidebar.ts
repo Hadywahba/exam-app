@@ -11,7 +11,7 @@ const sidebarcolumnItems: Omit<SidebarMenu, 'id'>[] = [
   },
   {
     name: 'Account Settings',
-    link: '/accout',
+    link: '/account',
     image: '/assets/icons/user-round.svg',
     activeImage: '/assets/icons/user-round-blue.svg',
     alt: 'Account',

@@ -27,7 +27,6 @@ export const UseDeleteAccount = () => {
         variant: 'success',
       });
 
-      
     },
   });
   return {
