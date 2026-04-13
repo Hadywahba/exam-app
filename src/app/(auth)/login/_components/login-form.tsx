@@ -50,6 +50,7 @@ export default function LoginForm() {
             errors={formState.errors}
             label="Username"
             placeholder="enter your name"
+            disabled={false}
           />
         </section>
 

@@ -19,7 +19,7 @@ export const UseResetPassword = () => {
   } = useMutation({
     mutationFn: async (data: ResetPasswordPayload) => {
       const payload = await resetPassword(data);
-      if ('code' in payload) {
+      if (payload.status===false) {
         throw new Error(payload.message);
       }
 
