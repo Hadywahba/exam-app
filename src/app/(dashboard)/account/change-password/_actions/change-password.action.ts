@@ -1,22 +1,21 @@
 'use server';
 import { getToken } from '@/lib/utility/manage-token';
 import { ChangePasswordFormFields } from '@/lib/schemas/change-password.schema';
-import { ChangePasswordResponse } from '../_types/change-password';
 
 // ChangePassword is a service function that calls the backend
 export async function ChangePassword(data: ChangePasswordFormFields) {
   const tokenObj = await getToken();
   const token = tokenObj?.accesstoken;
-  const response = await fetch(`${process.env.API}/auth/changePassword`, {
-    method: 'PATCH',
+  const response = await fetch(`${process.env.API}/users/change-password`, {
+    method: 'POST',
     body: JSON.stringify(data),
     headers: {
       'Content-type': 'application/json',
-      token: token!,
+      Authorization: `Bearer ${token}`,
     },
   });
 
-  const result: ApiResponse<ChangePasswordResponse> = await response.json();
+  const result: ApiChangePasswordResponse = await response.json();
 
   return result;
 }

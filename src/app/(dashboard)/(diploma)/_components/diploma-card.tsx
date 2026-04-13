@@ -8,25 +8,39 @@ export default async function DiplomaCard() {
   // it used to get data from server
   const { data, error } = await GetSubjects();
 
+  
+  const fixImageUrl = (url: string) => {
+  if (!url) return "";
+
+  return url
+    .replace("https://elevate-bootcamp.cloud", "https://exam-app.elevate-bootcamp.cloud")
+    .replace("https://www.elevate-bootcamp.cloud", "https://exam-app.elevate-bootcamp.cloud");
+};
   return (
     <>
       <ListError isError={!!error} message={error}>
-        {data?.subjects.map((item) => (
-          <Link href={'/exam'} key={item._id}>
+        {data?.data.map((item) => (
+          <Link
+            href={{
+              pathname: `/exam/${item.id}`,
+              query: { title: item.title },
+            }}
+            key={item.id}
+          >
             <section
               className="relative flex items-center justify-center"
-              title={item.name}
+              title={item.title}
             >
               <Image
-                src={item.icon}
+                src={fixImageUrl(item.image)}
                 width={334}
                 height={448}
-                alt={item.name}
+                alt={item.title}
                 className="h-[20.9375rem] w-full object-cover md:h-[28rem]"
               />
-              <div className="absolute bottom-3 left-3 right-3 flex h-[4.1875rem] items-center justify-start bg-[#155DFC80] ">
+              <div className="absolute bottom-3 left-3 right-3 flex h-[4.1875rem] items-center justify-start bg-[#155DFC80]">
                 <h1 className="w-[14.25rem] pl-4 text-xl font-semibold text-white">
-                  {item.name}
+                  {item.title}
                 </h1>
               </div>
             </section>

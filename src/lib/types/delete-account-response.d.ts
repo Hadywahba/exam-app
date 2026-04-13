@@ -2,11 +2,14 @@
 declare type ErrorDeleteResponss = {
   message: string;
   code: number;
+  status: false;
 };
 
 //declare for Success verifyPassword
 declare type SuccessDeleteResponse = {
-  status: string;
+  status: true;
+  code: number;
+  message: string;
 };
 
 declare type ApiDeleteResponse = ErrorDeleteResponss | SuccessDeleteResponse;

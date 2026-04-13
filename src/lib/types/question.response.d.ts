@@ -1,30 +1,20 @@
-// interface for All questions
-export interface ExamQuestionsResponse {
+// Root response
+export interface ExamQuestionsApiResponse {
   questions: Question[];
 }
 
-// interface for one question
 export interface Question {
-  _id: string;
-  question: string;
-  type: string;
+  id: string;
+  text: string;
+  examId: string;
+  immutable: boolean;
+  createdAt: string;
+  updatedAt: string;
   answers: Answer[];
-  correct: string;
-  subject: string | null;
-  exam: Exam;
-  createdAt: string;
 }
-// interface for Answer
+
+// Answer
 export interface Answer {
-  answer: string;
-  key: string;
-}
-export interface Exam {
-  _id: string;
-  title: string;
-  duration: number;
-  subject: string;
-  numberOfQuestions: number;
-  active: boolean;
-  createdAt: string;
+  id: string;
+  text: string;
 }

@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 export const UseDeleteAccount = () => {
   // Toast
   const { toast } = useToast();
-  
+
   // Mutation
   const {
     mutate: deleteMe,
@@ -15,7 +15,7 @@ export const UseDeleteAccount = () => {
     mutationFn: async () => {
       const payload = await DeleteAccount();
 
-      if ('code' in payload) {
+      if (payload.status === false) {
         throw new Error(payload.message);
       }
 
@@ -26,7 +26,6 @@ export const UseDeleteAccount = () => {
         title: '✅ Account Deleted Successful',
         variant: 'success',
       });
-
     },
   });
   return {

@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
-import { AccountFormFields } from '@/lib/schemas/account.schema';
 import { EditAccount } from '../_actions/account.action';
+import { EditProfile } from '../_types/account';
 
 export const UseAccount = () => {
   // Constant related to React-Query
   const queryClient = useQueryClient();
-  
+
   // Toast
   const { toast } = useToast();
 
@@ -16,10 +16,10 @@ export const UseAccount = () => {
     error,
     isPending,
   } = useMutation({
-    mutationFn: async (data: AccountFormFields) => {
+    mutationFn: async (data: EditProfile) => {
       const payload = await EditAccount(data);
 
-      if ('code' in payload) {
+      if (payload.status === false) {
         throw new Error(payload.message);
       }
 

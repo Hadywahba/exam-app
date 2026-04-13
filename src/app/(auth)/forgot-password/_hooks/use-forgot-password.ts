@@ -20,8 +20,8 @@ export const UseForgot = ({ redirect = true }) => {
     mutationFn: async (data: ForgotPasswordFormFields) => {
       const payload = await forgotPassword(data);
 
-      if ('code' in payload) {
-        throw new Error(payload.message);
+      if (payload.status === false) {
+        throw new Error(payload.errors[0].message);
       }
 
       return payload;
@@ -29,7 +29,7 @@ export const UseForgot = ({ redirect = true }) => {
 
     onSuccess: (_payload, variables) => {
       toast({
-        title: '✅ OTP sent to your email',
+        title: '✅  token to your email in URL',
         variant: 'success',
       });
 

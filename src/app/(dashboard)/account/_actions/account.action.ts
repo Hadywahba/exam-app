@@ -1,25 +1,22 @@
 'use server';
-import { EditProfileResponse } from '../_types/account';
+import { EditProfile, EditProfileResponse } from '../_types/account';
 import { getToken } from '@/lib/utility/manage-token';
-import { AccountFormFields } from '@/lib/schemas/account.schema';
 
 // EditAccount is a service function that calls the backend
-export async function EditAccount(data: AccountFormFields) {
+export async function EditAccount(data: EditProfile) {
   const tokenObj = await getToken();
   const token = tokenObj?.accesstoken;
-  const response = await fetch(`${process.env.API}/auth/editProfile`, {
-    method: 'PUT',
+  const response = await fetch(`${process.env.API}/users/profile`, {
+    method: 'PATCH',
     body: JSON.stringify({
-      email: data.email,
-      username: data.username,
       firstName: data.firstName,
       lastName: data.lastName,
       phone: data.phone,
+      profilePhoto: data.profilePhoto,
     }),
     headers: {
       'Content-type': 'application/json',
       Authorization: `Bearer ${token}`,
-      token: token!,
     },
   });
 

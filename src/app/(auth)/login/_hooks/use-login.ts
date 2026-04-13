@@ -10,7 +10,7 @@ export const UseLogin = () => {
   } = useMutation({
     mutationFn: async (data: LoginFormFields) => {
       const payload = await signIn('credentials', {
-        email: data.email,
+        username: data.username,
         password: data.password,
         redirect: false,
       });
@@ -21,7 +21,7 @@ export const UseLogin = () => {
         return (location.href = callbackUrl);
       }
       if (payload?.error) {
-        throw new Error('Invalid email or password');
+        throw new Error('Invalid username or password');
       }
 
       return payload;

@@ -8,13 +8,16 @@ import {
   Path,
   UseFormRegister,
 } from 'react-hook-form';
-interface NameFieldPrpos<T extends FieldValues>
+
+interface NameFieldProps<T extends FieldValues>
   extends React.HTMLAttributes<HTMLInputElement> {
-  register: UseFormRegister<T>;
-  name: Path<T>;
-  errors: FieldErrors<T>;
+  register?: UseFormRegister<T>;
+  name?: Path<T>;
+  errors?: FieldErrors<T>;
   label: string;
   placeholder: string;
+  disabled: boolean;
+  value?: string;
 }
 
 export default function NameField<T extends FieldValues>({
@@ -23,23 +26,35 @@ export default function NameField<T extends FieldValues>({
   errors,
   label,
   placeholder,
-}: NameFieldPrpos<T>) {
+  disabled,
+  value,
+  ...rest
+}: NameFieldProps<T>) {
+  const isRHF = register && name;
+
   return (
     <div className="flex w-full flex-col">
       <div className="grid w-full items-center gap-3">
         {/* Label */}
-        <Label htmlFor="picture" className="font-medium text-gray-800">
-          {label}
-        </Label>
+        <Label className="font-medium text-gray-800">{label}</Label>
 
         {/* Input */}
-        <Input {...register(name)} type="text" placeholder={placeholder} />
+        <Input
+          {...rest}
+          type="text"
+          placeholder={placeholder}
+          disabled={disabled}
+          value={isRHF ? undefined : value}
+          {...(isRHF ? register(name as Path<T>) : {})}
+        />
       </div>
 
       {/* Error */}
-      <div>
-        <ValidationError errors={errors} name={name} />
-      </div>
+      {errors && name && (
+        <div>
+          <ValidationError errors={errors} name={name} />
+        </div>
+      )}
     </div>
   );
 }

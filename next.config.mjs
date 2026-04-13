@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['exam.elevateegy.com'], // اضف هنا hostname بتاع الصور
+    domains: [
+      'exam-app.elevate-bootcamp.cloud',
+      'www.elevate-bootcamp.cloud',
+      'elevate-bootcamp.cloud', // ✅ مهم جدًا
+    ],
   },
 };
 

@@ -1,10 +1,17 @@
 'use client';
-import { Answers } from '@/app/(dashboard)/(diploma)/exam/[exam-id]/question/_types/answer';
-import { createContext, useState, ReactNode, useContext } from 'react';
+
+import { Answers } from '@/app/(dashboard)/(diploma)/exam/[exam]/[exam-id]/question/_types/answer';
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from 'react';
 
 type AnswersContextType = {
   selectedAnswers: Answers[];
-  handleAnswer: (questionId: string, selected: string) => void;
+  handleAnswer: (questionId: string, answerId: string) => void;
   resetAnswers: () => void;
 };
 
@@ -15,36 +22,42 @@ export const AnswersContext = createContext<AnswersContextType | undefined>(
 export const AnswersProvider = ({
   children,
   examId,
-  questions,
 }: {
   children: ReactNode;
   examId: string;
-  questions: { _id: string }[];
+  questions: { id: string }[];
 }) => {
   const AnswerKey = `questionAnswers-${examId}`;
-  const [selectedAnswers, setSelectedAnswers] = useState<Answers[]>(() => {
-    const savedAnswer = localStorage.getItem(AnswerKey);
-    if (savedAnswer) return JSON.parse(savedAnswer);
-    const defaultAnswer = questions.map((ques) => ({
-      questionId: ques._id,
-      correct: 'c',
-    }));
-    localStorage.setItem(AnswerKey, JSON.stringify(defaultAnswer));
-    return defaultAnswer;
-  });
 
-  const handleAnswer = (questionId: string, selected: string) => {
+  // ✅ init state safely
+  const [selectedAnswers, setSelectedAnswers] = useState<Answers[]>([]);
+
+  // ✅ load from localStorage once
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(AnswerKey);
+      if (saved) {
+        setSelectedAnswers(JSON.parse(saved));
+      }
+    } catch {
+      setSelectedAnswers([]);
+    }
+  }, [AnswerKey]);
+
+  // ✅ handle selecting answer
+  const handleAnswer = (questionId: string, answerId: string) => {
     setSelectedAnswers((prev) => {
       const updated = [
-        ...prev.filter((a) => a.questionId !== questionId),
-        { questionId, correct: selected },
+        ...(prev || []).filter((a) => a.questionId !== questionId),
+        { questionId, answerId },
       ];
-      // convert from array to string and save it
+
       localStorage.setItem(AnswerKey, JSON.stringify(updated));
       return updated;
     });
   };
-  // reset answers After submiting to start new exam
+
+  // ✅ reset after submit
   const resetAnswers = () => {
     setSelectedAnswers([]);
     localStorage.removeItem(AnswerKey);
@@ -58,9 +71,12 @@ export const AnswersProvider = ({
     </AnswersContext.Provider>
   );
 };
+
+// ✅ custom hook
 export const useAnswers = () => {
   const context = useContext(AnswersContext);
-  if (!context)
+  if (!context) {
     throw new Error('useAnswers must be used within AnswersProvider');
+  }
   return context;
 };

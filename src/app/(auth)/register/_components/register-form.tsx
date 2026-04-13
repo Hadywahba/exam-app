@@ -30,7 +30,7 @@ export default function RegisterForm() {
         firstName: '',
         lastName: '',
         password: '',
-        rePassword: '',
+        confirmPassword: '',
       },
     });
 
@@ -58,6 +58,7 @@ export default function RegisterForm() {
               errors={formState.errors}
               label="First name"
               placeholder="enter your First name"
+              disabled={false}
             />
             <NameField
               register={register}
@@ -65,6 +66,7 @@ export default function RegisterForm() {
               errors={formState.errors}
               label="Last name"
               placeholder="enter your Last name"
+              disabled={false}
             />
           </section>
 
@@ -76,6 +78,7 @@ export default function RegisterForm() {
               errors={formState.errors}
               label="Username"
               placeholder="enter your name"
+              disabled={false}
             />
           </section>
 
@@ -87,6 +90,7 @@ export default function RegisterForm() {
               errors={formState.errors}
               label="Email"
               placeholder="enter your email"
+              disabled={false}
             />
           </section>
 
@@ -135,7 +139,7 @@ export default function RegisterForm() {
           <section className="w-full">
             <PasswordField
               register={register}
-              name="rePassword"
+              name="confirmPassword"
               errors={formState.errors}
               label="Confirm Password"
               placeholder="enter your rePassword"

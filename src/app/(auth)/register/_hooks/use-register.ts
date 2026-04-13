@@ -20,8 +20,8 @@ export const UseRegister = () => {
     mutationFn: async (data: RegisterFormFields) => {
       const payload = await Register(data);
 
-      if ('code' in payload) {
-        throw new Error(payload.message);
+      if (payload.status===false) {
+        throw new Error(payload.errors[0].message);
       }
 
       return payload;
@@ -35,6 +35,9 @@ export const UseRegister = () => {
 
       router.push('/login');
     },
+    onError:(payload)=>{
+console.log(payload.stack)
+    }
   });
   return {
     registerForm,

@@ -1,9 +1,9 @@
+// hooks/useProfile.ts
 import { useQuery } from '@tanstack/react-query';
 import { getProfile } from '@/lib/services/profile.service';
 import { ProfileResponse } from '@/app/(dashboard)/account/_types/profile';
 
 export const UseProfile = () => {
-  // Query
   const {
     data: profile,
     isLoading,
@@ -12,10 +12,12 @@ export const UseProfile = () => {
     queryKey: ['userProfile'],
     queryFn: async () => {
       const payload = await getProfile();
-      if ('code' in payload) {
-        throw new Error(payload.message); 
+
+      if (!payload || payload.error) {
+        throw new Error(payload.error);
       }
-      return payload;
+
+      return payload.payload;
     },
   });
 

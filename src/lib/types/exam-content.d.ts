@@ -1,16 +1,27 @@
 export type ExamContentResponse = {
-  metadata: {
-    currentPage: number;
-    numberOfPages: number;
-    limit: number;
-  };
-  exams: {
-    _id: string;
-    title: string;
-    duration: string;
-    subject: string;
-    numberOfQuestions: number;
-    active: boolean;
-    createdAt: string;
-  }[];
+  metadata: MetaData;
+  data: Exam[];
 };
+
+export interface Exam {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  duration: number;
+  diplomaId: string;
+  immutable: boolean;
+  createdAt: string;
+  updatedAt: string;
+  diploma: Diploma;
+  _count: {
+    questions: number;
+  };
+}
+
+export interface Diploma {
+  id: string;
+  title: string;
+}
+
+

@@ -1,8 +1,9 @@
-import { VerifyFormFields } from '../schemas/forgot-password';
+import { ResetPasswordFormFields } from "../schemas/forgot-password";
 
-export const verifiyPassword = async (data: VerifyFormFields) => {
+
+export const verifiyPassword = async (data: ResetPasswordFormFields) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/auth/verifyResetCode`,
+    `${process.env.NEXT_PUBLIC_API}/auth/reset-password`,
     {
       method: 'POST',
       body: JSON.stringify(data),

@@ -20,9 +20,9 @@ export default function ChangePasswordForm() {
       mode: 'all',
       resolver: zodResolver(changepasswordschema),
       defaultValues: {
-        password: '',
-        oldPassword: '',
-        rePassword: '',
+        confirmPassword: '',
+        currentPassword: '',
+        newPassword: '',
       },
     });
 
@@ -44,18 +44,18 @@ export default function ChangePasswordForm() {
         <section className="w-full">
           <PasswordField
             register={register}
-            name="oldPassword"
+            name="currentPassword"
             errors={formState.errors}
             label="Current Password"
             placeholder="enter Password"
           />
         </section>
 
-        {/* password section */}
+        {/* newPassword section */}
         <section className="w-full">
           <PasswordField
             register={register}
-            name="password"
+            name="newPassword"
             errors={formState.errors}
             label="New Password"
             placeholder="enter New Password"
@@ -66,7 +66,7 @@ export default function ChangePasswordForm() {
         <section className="w-full">
           <PasswordField
             register={register}
-            name="rePassword"
+            name="confirmPassword"
             errors={formState.errors}
             label="Confirm New Password"
             placeholder="enter New Password"

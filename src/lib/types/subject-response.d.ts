@@ -1,13 +1,12 @@
-export type SubjectResponse = {
-  metadata: {
-    currentPage: number;
-    numberOfPages: number;
-    limit: number;
-  };
-  subjects: {
-    _id: string;
-    name: string;
-    icon: string;
+export type DiplomaResponse = {
+  metadata: MetaData;
+  data: {
+    id: string;
+    title: string;
+    description: string;
+    image: string;
     createdAt: string;
+    updatedAt: string;
+    immutable: boolean;
   }[];
 };

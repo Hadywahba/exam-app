@@ -1,5 +1,4 @@
 'use client';
-import EmailField from '@/components/features/auth-fields/email-field';
 import PasswordField from '@/components/features/auth-fields/password-field';
 import { LoginFormFields, loginschema } from '@/lib/schemas/login.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,6 +7,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UseLogin } from '../_hooks/use-login';
 import SubmitButton from '@/components/features/auth-fields/submit-button';
+import NameField from '../../register/_components/name-field';
 
 export default function LoginForm() {
   // Mutation
@@ -19,7 +19,7 @@ export default function LoginForm() {
       mode: 'all',
       resolver: zodResolver(loginschema),
       defaultValues: {
-        email: '',
+        username: '',
         password: '',
       },
     });
@@ -42,14 +42,14 @@ export default function LoginForm() {
         onSubmit={handleSubmit(onsubmit)}
         className="flex flex-col justify-center gap-4"
       >
-        {/* email section */}
+        {/* user name section */}
         <section className="w-full">
-          <EmailField
+          <NameField
             register={register}
-            name="email"
+            name="username"
             errors={formState.errors}
-            label="Email"
-            placeholder="enter your email"
+            label="Username"
+            placeholder="enter your name"
           />
         </section>
 

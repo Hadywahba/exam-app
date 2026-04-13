@@ -1,5 +1,6 @@
 'use client';
-import { QuestionsAnswerResponse } from '@/app/(dashboard)/(diploma)/exam/[exam-id]/question/_types/answer';
+
+import { QuestionsAnswerResponse } from '@/app/(dashboard)/(diploma)/exam/[exam]/[exam-id]/question/_types/answer';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 
 type CorrectAnswersContextType = {

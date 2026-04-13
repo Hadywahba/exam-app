@@ -1,17 +1,18 @@
 export type RegisterResponse = {
   token: string;
   user: {
-    _id: string;
+    id: string;
     username: string;
     firstName: string;
     lastName: string;
     email: string;
     phone: string;
     role: string;
-    isVerified: boolean;
+    emailVerified: boolean;
     createdAt: string;
-    passwordResetCode?: string;
-    passwordResetExpires?: string;
-    resetCodeVerified?: boolean;
+    profilePhoto: string;
+    phoneVerified: boolean;
+    createdAt: string;
+    updatedAt: string;
   };
 };

@@ -4,32 +4,34 @@ import Link from 'next/link';
 import React from 'react';
 import { MoveLeft } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { otpschema, VerifyFormFields } from '@/lib/schemas/forgot-password';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import {} from '@/components/ui/input-otp';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import SubmitButton from '@/components/features/auth-fields/submit-button';
-import InputOTPWithResendTimerDemo from './input-otp-timer';
-import { useSearchParams } from 'next/navigation';
 import { UseVeifiy } from '../_hooks/use-verify';
+import PasswordField from '@/components/features/auth-fields/password-field';
+import {
+  ResetPasswordFormFields,
+  resetschema,
+} from '@/lib/schemas/forgot-password';
+import NameField from '../../register/_components/name-field';
+
 export default function VerifyPasswordForm() {
   // Mutation
   const { error, isPending, verifiy } = UseVeifiy();
 
   // Form
-  const { handleSubmit, formState, control } = useForm<VerifyFormFields>({
-    mode: 'all',
-    resolver: zodResolver(otpschema),
-    defaultValues: {
-      resetCode: '',
-    },
-  });
-
-  // Variables
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email');
+  const { handleSubmit, formState, register } =
+    useForm<ResetPasswordFormFields>({
+      mode: 'all',
+      resolver: zodResolver(resetschema),
+      defaultValues: {
+        token: '',
+        confirmPassword: '',
+        newPassword: '',
+      },
+    });
 
   // Functions
-  const onsubmit: SubmitHandler<VerifyFormFields> = async (data) => {
+  const onsubmit: SubmitHandler<ResetPasswordFormFields> = async (data) => {
     verifiy(data);
     console.log(data);
   };
@@ -51,43 +53,48 @@ export default function VerifyPasswordForm() {
         {/* title */}
         <div className="pb-6">
           <h1 className="mb-2 font-inter text-2xl font-bold text-gray-800 sm:text-3xl">
-            Verify OTP
+            Create New Password
           </h1>
           <p className="text-sm font-normal text-gray-500 sm:text-base">
-            Please enter the 6-digits code we have sent to:
-          </p>
-          <p className="text-sm font-normal sm:text-base">
-            {email}.{' '}
-            <span className="text-sm font-medium text-blue-600 underline sm:text-base">
-              <Link href={'/forgot-password?step=1'}>Edit</Link>
-            </span>
+            Please enter your new password below. Make sure it is strong and
+            secure.
           </p>
         </div>
 
         {/* OTP section */}
         <form onSubmit={handleSubmit(onsubmit)}>
-          <div className="mt-4 w-full items-center gap-2">
-            {/* Controller */}
-            <Controller
-              name="resetCode"
-              control={control}
-              render={({ field }) => (
-                <InputOTPWithResendTimerDemo
-                  value={field.value}
-                  onChange={field.onChange}
-                  onBlur={() => field.onBlur()}
-                  email={email!}
-                />
-              )}
+          {/* Token section */}
+          <section className="w-full">
+            <NameField
+              register={register}
+              name="token"
+              errors={formState.errors}
+              label="token"
+              placeholder="enter your new token"
+              disabled={false}
             />
+          </section>
+          {/* password section */}
+          <section className="w-full">
+            <PasswordField
+              register={register}
+              name="newPassword"
+              errors={formState.errors}
+              label="new Password"
+              placeholder="enter your Password"
+            />
+          </section>
 
-            {/* Error */}
-            {formState.errors.resetCode && (
-              <div className="text-center text-xs text-red-500">
-                {formState.errors.resetCode.message as string}
-              </div>
-            )}
-          </div>
+          {/*confirm  password section */}
+          <section className="w-full">
+            <PasswordField
+              register={register}
+              name="confirmPassword"
+              errors={formState.errors}
+              label="Confirm Password"
+              placeholder="enter your rePassword"
+            />
+          </section>
 
           {/* button */}
           <section>

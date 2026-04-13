@@ -1,16 +1,16 @@
 export type ProfileResponse = {
   user: {
-    _id: string;
+    id: string;
     username: string;
     firstName: string;
     lastName: string;
     email: string;
     phone: string;
-    role: string;
-    isVerified: boolean;
+    emailVerified: boolean;
+    phoneVerified: boolean;
     createdAt: string;
-    passwordResetCode?: string;
-    passwordResetExpires?: string;
-    resetCodeVerified?: boolean;
+    updatedAt: string;
+    profilePhoto: string | null;
+    role: string;
   };
 };

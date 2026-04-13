@@ -5,11 +5,11 @@ import { getToken } from '@/lib/utility/manage-token';
 export async function DeleteAccount() {
   const tokenObj = await getToken();
   const token = tokenObj?.accesstoken;
-  const response = await fetch(`${process.env.API}/auth/deleteMe`, {
+  const response = await fetch(`${process.env.API}/users/account`, {
     method: 'DELETE',
     headers: {
       'Content-type': 'application/json',
-      token: token!,
+      Authorization: `Bearer ${token}`,
     },
   });
 

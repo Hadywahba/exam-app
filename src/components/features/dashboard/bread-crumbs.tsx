@@ -27,8 +27,18 @@ export default function Breadcrumbs() {
         const fullPath = '/' + segments.slice(0, index + 1).join('/');
         const isLast = index === segments.length - 1;
 
-        const segmentLabel =
-          index === 1 && title ? title : segment.replace(/-/g, ' ');
+        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(segment);
+
+        // لو UUID وعندنا title، نحط الـ title بدله، لو مفيش title نشيله
+        if (isUUID && !title) return null;
+
+        const segmentLabel = isUUID && title ? title : segment.replace(/-/g, ' ');
+
+        // نعرض الـ UUID مرة واحدة بس (أول UUID بيلاقيه)
+        const previousUUIDs = segments.slice(0, index).filter(s =>
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s)
+        );
+        if (isUUID && previousUUIDs.length > 0) return null;
 
         return (
           <span key={index} className="flex items-center gap-1">

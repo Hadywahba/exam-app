@@ -1,4 +1,5 @@
 import z from 'zod';
+import { passwordSchema } from './password.schema';
 
 export const registerschema = z
   .object({
@@ -27,28 +28,27 @@ export const registerschema = z
         'Invalid Egyptian phone number',
       ),
 
-    password: z
-      .string()
-      .nonempty(' your password is required')
-      .min(8, { message: 'Password must be at least 8 characters long.' })
-      .refine((password) => /[A-Z]/.test(password), {
-        message: 'Password must contain at least one uppercase letter.',
-      })
-      .refine((password) => /[a-z]/.test(password), {
-        message: 'Password must contain at least one lowercase letter.',
-      })
-      .refine((password) => /[0-9]/.test(password), {
-        message: 'Password must contain at least one number.',
-      })
-      .refine((password) => /[!@#$%^&*]/.test(password), {
-        message: 'Password must contain at least one special character.',
-      }),
+    password: passwordSchema,
 
-    rePassword: z.string().nonempty(' your Confirm Password is required'),
+    confirmPassword: z.string().nonempty(' your Confirm Password is required'),
   })
-  .refine((data) => data.password === data.rePassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
-    path: ['rePassword'],
+    path: ['confirmPassword'],
   });
 
 export type RegisterFormFields = z.infer<typeof registerschema>;
+
+export const registerverifyschema = z.object({
+  code: z.string(),
+});
+
+// Verify Password Form Fields
+export type RegisterVerifyFormFields = z.infer<typeof registerverifyschema>;
+
+export const registeremailschema = z.object({
+  email: z.string(),
+});
+
+// Verify Password Form Fields
+export type RegisterEmailFormFields = z.infer<typeof registeremailschema>;

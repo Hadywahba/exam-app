@@ -1,16 +1,17 @@
 import { GetAllAubjects } from '@/lib/services/subject.service';
-import { SubjectResponse } from '@/lib/types/subject-response';
+import { DiplomaResponse } from '@/lib/types/subject-response';
 
+const LIMT = 20;
 // Controller
 export const GetSubjects = async (): Promise<{
-  data?: SubjectResponse;
+  data?: DiplomaResponse;
   error?: string;
 }> => {
-  const payload = await GetAllAubjects();
+  const payload = await GetAllAubjects(LIMT);
 
-  if ('code' in payload) {
-     return { error: payload.message };
+  if (payload.status === false) {
+    return { error: payload.message };
   }
 
-  return { data: payload }
+  return { data: payload.payload };
 };

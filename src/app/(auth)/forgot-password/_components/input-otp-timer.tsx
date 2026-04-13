@@ -1,6 +1,6 @@
 'use client';
 
-import { useId } from 'react';
+import { useContext, useId } from 'react';
 
 import {
   InputOTP,
@@ -8,26 +8,29 @@ import {
   InputOTPSlot,
 } from '@/components/ui/input-otp';
 import { useTimer } from '@/hooks/use-timer';
-import { UseForgot } from '../_hooks/use-forgot-password';
 import { useToast } from '@/hooks/use-toast';
+import { UseRegisterVeifiyEmail } from '../../register/_hooks/use-register-email';
+import { UserEmail } from '@/components/providers/auth/email-provider';
 
 interface InputOTPWithResendTimerDemoProps {
   value: string;
   onChange: (value: string) => void;
   onBlur?: () => void;
-  email: string;
 }
 const InputOTPWithResendTimerDemo = ({
   value,
   onChange,
   onBlur,
-  email,
 }: InputOTPWithResendTimerDemoProps) => {
   // Toast
   const { toast } = useToast();
 
   // Mutation
-  const { forgot } = UseForgot({ redirect: false });
+  // Mutation
+  const { verifiy } = UseRegisterVeifiyEmail();
+
+  // Context
+  const { email } = useContext(UserEmail)!;
 
   //  hooks
   const id = useId();
@@ -35,7 +38,15 @@ const InputOTPWithResendTimerDemo = ({
 
   //  functions
   const resendOtp = () => {
-    forgot(
+    if (!email) {
+      toast({
+        title: 'Email not found',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    verifiy(
       { email },
       {
         onSuccess: () => {
@@ -84,7 +95,11 @@ const InputOTPWithResendTimerDemo = ({
           <p className="text-sm font-medium text-gray-500">
             {' '}
             Didn’t receive the code?{' '}
-            <button onClick={resendOtp} className="text-blue-600 underline">
+            <button
+              type="button"
+              onClick={resendOtp}
+              className="text-blue-600 underline"
+            >
               Resend
             </button>
           </p>

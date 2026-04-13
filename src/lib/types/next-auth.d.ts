@@ -1,26 +1,23 @@
-import { User } from "next-auth";
+import { User } from 'next-auth';
 
-declare module "next-auth" {
+declare module 'next-auth' {
   /**
    * The shape of the user object returned in the OAuth providers' `profile` callback,
    * or the second parameter of the `session` callback, when using a database.
-   */ 
+   */
   // ! data from authorize function
   interface User {
     accesstoken: string;
     user: {
-      _id: string;
+      id: string;
       username: string;
       firstName: string;
       lastName: string;
       email: string;
       phone: string;
       role: string;
-      isVerified: boolean;
-      createdAt: string;
-      passwordResetCode?: string;
-      passwordResetExpires?: string;
-      resetCodeVerified?: boolean;
+      emailVerified: boolean;
+      phoneVerified: boolean;
     };
   }
   /**
@@ -31,10 +28,8 @@ declare module "next-auth" {
   }
 }
 
-declare module "next-auth/jwt" {
+declare module 'next-auth/jwt' {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  interface JWT extends User {
-   
-  }
+  interface JWT extends User {}
 }

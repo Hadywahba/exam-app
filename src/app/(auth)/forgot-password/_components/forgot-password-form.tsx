@@ -54,6 +54,7 @@ export default function ForgotPasswordForm() {
               errors={formState.errors}
               label="Email"
               placeholder="enter your email"
+              disabled={false}
             />
           </section>
 

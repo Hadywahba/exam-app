@@ -9,23 +9,22 @@ export const UseChange = () => {
 
   // Mutation
   const {
-    mutate:changePassword,
+    mutate: changePassword,
     error,
     isPending,
-    
   } = useMutation({
     mutationFn: async (data: ChangePasswordFormFields) => {
       const payload = await ChangePassword(data);
 
-      if ('code' in payload) {
+      if (payload.status === false) {
         throw new Error(payload.message);
       }
 
       return payload;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast({
-        title: '✅Your password has been successfully updated',
+        title: data.message,
         variant: 'success',
       });
     },
