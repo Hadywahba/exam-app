@@ -114,7 +114,7 @@ export default function QuestionContent({
   }, [usedTime, submitted, onsubmit]);
 
   return (
-    <main className="flex flex-col gap-4">
+    <main className="flex flex-col gap-4 pb-28">
       {/* header */}
       <section>
         <div className="mb-4 flex w-full flex-col gap-2 sm:flex sm:flex-row sm:items-center sm:justify-between sm:gap-0">

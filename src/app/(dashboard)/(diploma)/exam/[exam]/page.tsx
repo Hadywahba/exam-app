@@ -22,7 +22,7 @@ export default async function page({ params }: { params: { exam: string } }) {
           </div>
         }
       >
-        <div className="mt-5 flex h-[61.875rem] flex-col gap-4 bg-white px-6 pt-6 ">
+        <div className="mt-5 flex  flex-col gap-4 bg-white px-6 pt-6 mb-4 ">
           <ContentExam examId={diplomaExamId} />
         </div>
       </Suspense>

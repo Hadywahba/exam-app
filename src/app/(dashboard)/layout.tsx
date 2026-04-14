@@ -25,7 +25,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* children section */}
-        <div className="w-full"> {children}</div>
+        <div className="w-full min-h-screen flex-1"> {children}</div>
       </section>
     </main>
   );
