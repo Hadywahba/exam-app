@@ -32,8 +32,8 @@ export default async function page({
       <main className="flex flex-col">
         {/* No question in subject */}
         {(!questions || questions.length === 0) && (
-          <div className="flex items-center justify-center py-40">
-            <p className="w-full bg-white py-20 text-center text-2xl text-gray-800">
+          <div className="flex items-center justify-center py-20">
+            <p className="text-sm font-medium text-gray-500 sm:text-lg md:text-xl">
               No questions found for this exam.
             </p>
           </div>

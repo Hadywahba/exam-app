@@ -11,9 +11,17 @@ interface ContentExamProps {
 export default async function ContentExam({ examId }: ContentExamProps) {
   // Get Exam data from server
   const { examContentData, error } = await GetExamContent(examId);
+
   return (
     <>
       <ListError isError={!!error} message={error}>
+        {(!examContentData || examContentData?.data?.length === 0) && (
+          <div className="flex items-center justify-center py-20">
+            <p className="text-sm font-medium text-gray-500 sm:text-lg md:text-xl">
+              No exam content available at the moment
+            </p>
+          </div>
+        )}
         {examContentData?.data.map((item) => (
           <Link
             key={item.id}
@@ -23,7 +31,7 @@ export default async function ContentExam({ examId }: ContentExamProps) {
             }}
           >
             <section
-              className="flex h-[5rem] flex-col bg-blue-50 px-4 hover:bg-blue-100 md:flex md:flex-row md:items-center md:justify-between "
+              className="flex h-[5rem] flex-col bg-blue-50 px-4 hover:bg-blue-100 md:flex md:flex-row md:items-center md:justify-between"
               title={item.title}
             >
               {/* Left Part */}
