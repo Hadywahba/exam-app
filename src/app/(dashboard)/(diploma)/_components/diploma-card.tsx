@@ -36,7 +36,7 @@ export default async function DiplomaCard() {
                 width={334}
                 height={448}
                 alt={item.title}
-                className="h-[20.9375rem] w-full object-contain md:h-[28rem]"
+                className="h-[20.9375rem] w-full object-center md:h-[28rem]"
               />
               <div className="absolute bottom-3 left-3 right-3 flex h-[4.1875rem] items-center justify-start bg-[#155DFC80]">
                 <h1 className="w-[14.25rem] pl-4 text-xl font-semibold text-white">
