@@ -41,7 +41,7 @@ export default async function ContentExam({ examId }: ContentExamProps) {
                 </h1>
 
                 <p className="text-xs font-normal text-gray-500 sm:text-sm">
-                  {item._count.questions} Questions{' '}
+                  {item._count?.questions} Questions{' '}
                 </p>
               </div>
               {/* Right Part */}
