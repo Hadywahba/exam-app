@@ -4,7 +4,7 @@ import { getToken } from '../utility/manage-token';
 export const GetAllExamContent = async (diplomaId: string) => {
   const tokenObj = await getToken();
   const token = tokenObj?.accesstoken;
-  console.log(token);
+
   const response = await fetch(
     `${process.env.API}/exams?diplomaId=${diplomaId}&page=1&limit=20`,
     {
@@ -17,6 +17,5 @@ export const GetAllExamContent = async (diplomaId: string) => {
     },
   );
   const result: ApiResponse<ExamContentResponse> = await response.json();
-  console.log(result);
   return result;
 };

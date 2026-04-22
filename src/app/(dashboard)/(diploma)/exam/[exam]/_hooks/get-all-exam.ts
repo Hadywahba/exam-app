@@ -1,14 +1,19 @@
 import { getExams } from '@/lib/services/allexam.service';
-import { ExamContentResponse } from '@/lib/types/exam-content';
+import { ExamsResponse } from '@/lib/types/exam-content';
 
 export const GetAllExams = async (): Promise<{
-  data?: ExamContentResponse;
+  data?: ExamsResponse;
   error?: string;
 }> => {
   try {
-    const payload = await getExams();
-    return { data: payload };
+    const data = await getExams();
+
+    return {
+      data,
+    };
   } catch (error) {
-    return { error: 'Failed to fetch exams' };
+    return {
+      error: error instanceof Error ? error.message : 'Failed to fetch exams',
+    };
   }
 };

@@ -25,3 +25,7 @@ export interface Diploma {
 }
 
 
+export interface ExamsResponse {
+  data: Exam[];
+  metadata: MetaData;
+}

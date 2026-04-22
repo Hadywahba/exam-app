@@ -8,60 +8,59 @@ export async function GET(req: NextRequest) {
   });
 
   if (!token?.accesstoken) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json(
+      {
+        status: false,
+        code: 401,
+        message: 'Unauthorized',
+      },
+      { status: 401 },
+    );
   }
 
   try {
-    // قراءة query params
     const { searchParams } = new URL(req.url);
 
     const page = searchParams.get('page') ?? '1';
     const limit = searchParams.get('limit') ?? '20';
-    const diplomaId = searchParams.get('diplomaId');
-    const search = searchParams.get('search'); // 👈 جديد (لو عايز بحث)
 
-    // بناء URL للـ external API
     const apiUrl = new URL('https://exam-app.elevate-bootcamp.cloud/api/exams');
 
     apiUrl.searchParams.set('page', page);
     apiUrl.searchParams.set('limit', limit);
 
-    if (diplomaId) {
-      apiUrl.searchParams.set('diplomaId', diplomaId);
-    }
-
-    if (search) {
-      apiUrl.searchParams.set('search', search);
-    }
-
     const response = await fetch(apiUrl.toString(), {
-      method: 'GET',
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${token.accesstoken}`,
       },
     });
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => null);
+    const result = await response.json();
 
+    if (!response.ok) {
       return NextResponse.json(
         {
-          error: 'Failed to fetch exams',
-          details: error,
+          status: false,
+          code: response.status,
+          message: result?.message || 'Failed to fetch exams',
+          errors: result?.errors || [],
         },
         { status: response.status },
       );
     }
 
-    const data = await response.json();
-
-    return NextResponse.json(data);
+    return NextResponse.json({
+      status: true,
+      code: 200,
+      payload: result.payload,
+    });
   } catch (err) {
     return NextResponse.json(
       {
-        error: 'Server error',
-        message: err instanceof Error ? err.message : 'Unknown error',
+        status: false,
+        code: 500,
+        error: err instanceof Error ? err.message : 'Server error',
       },
       { status: 500 },
     );
