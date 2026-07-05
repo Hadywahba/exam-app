@@ -28,11 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${geistMono.className} ${inter.variable}  antialiased [@media(min-width:1920px)]:container [@media(min-width:1920px)]:mx-auto`}>
-        <Providers> 
-           <Toaster />
+      <body
+        className={` ${geistMono.className} ${inter.variable} antialiased [@media(min-width:1920px)]:container [@media(min-width:1920px)]:mx-auto`}
+      >
+        <Providers>
+          <Toaster />
           {children}
-          </Providers>
+        </Providers>
       </body>
     </html>
   );
