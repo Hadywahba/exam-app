@@ -24,7 +24,6 @@ export default function SubmitButton({
   textLink,
   link,
   isAuth,
- 
 }: SubmitButtonProps) {
   return (
     <div className="flex flex-col gap-6 pt-4">
@@ -33,16 +32,16 @@ export default function SubmitButton({
 
       {/* Button */}
       <div className="flex w-full flex-col items-center justify-center gap-9">
-       <Button
+        <Button
           variant="default"
           className="w-full"
           disabled={isPending || (!disbale && loading)}
         >
           {isPending ? 'Loading...' : label}
         </Button>
-      
+
         {isAuth && (
-          <p className=" text-xs sm:text-sm font-medium text-gray-500">
+          <p className="text-xs font-medium text-gray-500 sm:text-sm">
             {text}
             <Link
               href={String(link)}
