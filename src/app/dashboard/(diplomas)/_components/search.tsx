@@ -3,7 +3,7 @@ import React from 'react';
 import { SlidersHorizontal, ChevronsDownUp } from 'lucide-react';
 import SearchField from '@/app/(auth)/register/_components/search-field';
 import SelectState from './select-state';
-import { UseLogin } from '@/app/(auth)/login/_hooks/use-login';
+
 import { useForm } from 'react-hook-form';
 import DashboardSubmitButton from '@/components/features/dashboard/dashboard-button';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -12,9 +12,6 @@ type SearchFormFields = {
   immutable: boolean | null;
 };
 export default function Search() {
-  // Mutation
-  const { error, isPending } = UseLogin();
-
   // Hooks
   const router = useRouter();
   const pathname = usePathname();
@@ -82,10 +79,8 @@ export default function Search() {
         <DashboardSubmitButton
           label1="Clear"
           label2="Apply"
-          message={error}
           loading={formState.isSubmitting}
           disbale={formState.isValid}
-          isPending={isPending}
           onClear={onClear}
         />
       </form>

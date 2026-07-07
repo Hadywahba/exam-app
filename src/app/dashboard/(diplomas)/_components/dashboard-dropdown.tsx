@@ -10,7 +10,13 @@ import { Ellipsis } from 'lucide-react';
 import { Trash2 } from 'lucide-react';
 import { PenLine } from 'lucide-react';
 import { Eye } from 'lucide-react';
-export function SidebarDropdown() {
+import Link from 'next/link';
+
+type SidebarDropdownProps = {
+  diplom: string;
+  diplomid: string;
+};
+export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
   return (
     <>
       {/* DropdownMenu */}
@@ -25,10 +31,16 @@ export function SidebarDropdown() {
           <DropdownMenuGroup>
             {/* Account part */}
             <DropdownMenuItem>
-              <div className="flex items-center justify-center gap-2">
+              <Link
+                href={{
+                  pathname: `/dashboard/${diplomid}`,
+                  query: { title: `${diplom}` },
+                }}
+                className="flex items-center justify-center gap-2"
+              >
                 <Eye size={16} className="text-green-500" />
                 <h4 className="text-sm font-normal text-gray-500">View</h4>
-              </div>
+              </Link>
             </DropdownMenuItem>
 
             {/* SignOut part */}

@@ -27,3 +27,18 @@ declare type GetDiplomasParams = {
   sortBy?: 'title' | 'createdAt';
   sortOrder?: 'asc' | 'desc';
 };
+
+declare type Diploma = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  immutable: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+
+declare type DiplomaResponse = {
+  diploma: Diploma;
+};

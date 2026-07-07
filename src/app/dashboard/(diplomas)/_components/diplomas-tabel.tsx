@@ -14,13 +14,6 @@ import { Ellipsis } from 'lucide-react';
 import { SidebarDropdown } from './dashboard-dropdown';
 import { SortDropdown } from './sort-dropdown';
 
-type Diploma = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-};
-
 type DiplomasTableProps = {
   data: Diploma[];
   error?: string | null;
@@ -29,8 +22,6 @@ export default async function DiplomasTabel({
   data,
   error,
 }: DiplomasTableProps) {
-  // Hook
-
   return (
     <ListError isError={!!error} message={error ?? undefined}>
       {/* Desktop / Tablet: Table view */}
@@ -77,7 +68,7 @@ export default async function DiplomasTabel({
                 {/* Actions */}
                 <TableCell>
                   <div className="mx-auto flex size-8 items-center justify-center rounded bg-gray-200">
-                    <SidebarDropdown />
+                    <SidebarDropdown diplom={item.title} diplomid={item.id}  />
                   </div>
                 </TableCell>
               </TableRow>
