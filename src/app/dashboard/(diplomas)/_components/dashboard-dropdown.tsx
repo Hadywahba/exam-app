@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,12 +12,16 @@ import { Trash2 } from 'lucide-react';
 import { PenLine } from 'lucide-react';
 import { Eye } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import DeleteAdminModal from './delete-modal-Admin';
 
 type SidebarDropdownProps = {
   diplom: string;
   diplomid: string;
 };
 export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
+  // State
+  const [openDeleteModal, setopenDeleteModal] = useState<boolean>(false);
   return (
     <>
       {/* DropdownMenu */}
@@ -53,7 +58,12 @@ export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
 
             {/* SignOut part */}
             <DropdownMenuItem>
-              <div className="flex items-center gap-2">
+              <div
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={() => {
+                  setopenDeleteModal(true);
+                }}
+              >
                 <Trash2 size={16} className="text-red-600" />
                 <span className="text-sm font-normal text-gray-500">
                   Delete
@@ -63,6 +73,14 @@ export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {openDeleteModal && (
+        <DeleteAdminModal
+          diplomaId={diplomid}
+          setopenModal={setopenDeleteModal}
+          openModal={openDeleteModal}
+        />
+      )}
     </>
   );
 }
