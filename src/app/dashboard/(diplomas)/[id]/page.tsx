@@ -4,6 +4,7 @@ import ListError from '@/components/error/list-error';
 import Image from 'next/image';
 import { Ban } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import DiplomaActions from '../_components/diploma-actions';
 const BUTTONS = [
   {
     titleKey: 'Immutable',
@@ -36,21 +37,7 @@ export default async function page({ params }: { params: { id: string } }) {
             {DiplomaData?.diploma.title}
           </h1>
           {/* Buttons */}
-          <div className="flex w-full flex-1 flex-col items-center gap-4 lg:flex lg:flex-row lg:justify-end">
-            {BUTTONS.map((button) => {
-              const Icon = button.icon;
-
-              return (
-                <Button
-                  key={button.titleKey}
-                  className={`${button.color} w-full hover:opacity-90 lg:w-40`}
-                >
-                  <Icon className="mr-2 h-4 w-4" />
-                  {button.titleKey}
-                </Button>
-              );
-            })}
-          </div>
+          <DiplomaActions diplomaId={diplomaId} />
         </section>
 
         <section className="mt-6 space-y-3 bg-white p-4">

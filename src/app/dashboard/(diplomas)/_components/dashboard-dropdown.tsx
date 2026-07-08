@@ -22,6 +22,7 @@ type SidebarDropdownProps = {
 export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
   // State
   const [openDeleteModal, setopenDeleteModal] = useState<boolean>(false);
+
   return (
     <>
       {/* DropdownMenu */}
@@ -59,7 +60,7 @@ export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
             {/* SignOut part */}
             <DropdownMenuItem>
               <div
-                className="flex items-center gap-2 cursor-pointer"
+                className="flex cursor-pointer items-center gap-2"
                 onClick={() => {
                   setopenDeleteModal(true);
                 }}
