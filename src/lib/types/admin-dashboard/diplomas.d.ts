@@ -32,13 +32,16 @@ declare type Diploma = {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image: string | null;
   immutable: boolean;
   createdAt: string;
   updatedAt: string;
 };
 
-
 declare type DiplomaResponse = {
+  diploma: Diploma;
+};
+
+declare type EditDiplomaResponse = {
   diploma: Diploma;
 };

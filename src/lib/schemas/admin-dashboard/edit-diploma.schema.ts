@@ -5,8 +5,10 @@ export const editschema = z.object({
   title: z
     .string()
     .min(2, 'length must be at least 2 characters')
-    .nonempty(' your title is required'),
-  description: z.string().nonempty(' your description is required'),
+    .nonempty(' your title is required')
+    .optional(),
+  description: z.string().nonempty(' your description is required').optional(),
+  image: z.string().nullable().optional(),
 });
 
 export type EditFormFields = z.infer<typeof editschema>;

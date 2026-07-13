@@ -42,7 +42,7 @@ export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
                   pathname: `/dashboard/${diplomid}`,
                   query: { title: `${diplom}` },
                 }}
-                className="flex items-center justify-center gap-2"
+                className="flex items-center justify-start gap-2 cursor-pointer  w-full text-start"
               >
                 <Eye size={16} className="text-green-500" />
                 <h4 className="text-sm font-normal text-gray-500">View</h4>
@@ -56,7 +56,7 @@ export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
                   pathname: `/dashboard/${diplomid}/edit`,
                   query: { title: `${diplom}` },
                 }}
-                className="flex items-center gap-2"
+                className="flex items-center justify-start gap-2 cursor-pointer  w-full text-start"
               >
                 <PenLine size={16} className="text-blue-600" />
                 <span className="text-sm font-normal text-gray-500">Edit</span>
@@ -66,7 +66,7 @@ export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
             {/* SignOut part */}
             <DropdownMenuItem>
               <div
-                className="flex cursor-pointer items-center gap-2"
+                className="flex items-center justify-start gap-2 cursor-pointer  w-full text-start"
                 onClick={() => {
                   setopenDeleteModal(true);
                 }}

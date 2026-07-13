@@ -26,13 +26,23 @@ export default async function page({ params }: { params: { id: string } }) {
           {/* Image Section */}
           <figure>
             <p className="text-sm font-normal text-gray-400">Image</p>
-            <Image
-              src={String(DiplomaData?.diploma.image)}
-              alt={String(DiplomaData?.diploma.title)}
-              width={300}
-              height={300}
-              className="rounded-md object-cover"
-            />
+            {DiplomaData?.diploma.image ? (
+              <Image
+                src={String(DiplomaData?.diploma.image)}
+                alt={String(DiplomaData?.diploma.title)}
+                width={300}
+                height={300}
+                className="rounded-md object-cover"
+              />
+            ) : (
+              <Image
+                src={'/assets/images/file-image.png'}
+                alt={String(DiplomaData?.diploma.title)}
+                width={300}
+                height={300}
+                className="rounded-md object-cover"
+              />
+            )}
           </figure>
 
           {/* Title */}

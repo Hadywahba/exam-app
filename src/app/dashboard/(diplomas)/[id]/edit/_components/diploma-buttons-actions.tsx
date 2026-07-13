@@ -1,5 +1,6 @@
 'use client';
 
+import SubmitError from '@/components/error/submit-error';
 import { Button } from '@/components/ui/button';
 import { Save, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -8,7 +9,7 @@ const BUTTONS = [
   {
     title: 'Cancel',
     icon: X,
-    color: 'bg-gray-200 hover:bg-red-700 text-black',
+    color: 'bg-gray-200 hover:bg-gray-400 text-black',
     action: 'Cancel',
   },
   {
@@ -19,21 +20,13 @@ const BUTTONS = [
   },
 ] as const;
 
-export default function DiplomaButtonsActions() {
-  // State
-
-  // Hook
+type Props = {
+  isPending: boolean;
+  error: Error | null;
+};
+export default function DiplomaButtonsActions({ isPending, error }: Props) {
+  //
   const router = useRouter();
-
-  const handleClick = async (action: (typeof BUTTONS)[number]['action']) => {
-    switch (action) {
-      case 'Cancel':
-        break;
-
-      case 'Save':
-        break;
-    }
-  };
 
   return (
     <>
@@ -44,15 +37,24 @@ export default function DiplomaButtonsActions() {
           return (
             <Button
               key={button.title}
-              className={`${button.color} w-full hover:opacity-90 lg:w-fit`}
-              onClick={() => handleClick(button.action)}
+              type={button.action === 'Save' ? 'submit' : 'button'}
+              className={`${button.color} w-full hover:opacity-90 disabled:opacity-50 lg:w-fit`}
+              onClick={
+                button.action === 'Cancel'
+                  ? () => router.push('/dashboard')
+                  : undefined
+              }
             >
               <Icon className="mr-2 h-4 w-4" />
-              {button.title}
+              {button.action === 'Save' && isPending
+                ? 'Saving...'
+                : button.title}
             </Button>
           );
         })}
       </div>
+      {/* Error */}
+      <SubmitError errors={error} />
     </>
   );
 }

@@ -46,13 +46,23 @@ export default async function DiplomasTabel({
               <TableRow key={item.id}>
                 {/* Image */}
                 <TableCell>
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={120}
-                    height={80}
-                    className="mx-auto rounded-md object-cover"
-                  />
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={120}
+                      height={80}
+                      className="mx-auto rounded-md object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src={'/assets/images/file-image.png'}
+                      alt={item.title}
+                      width={120}
+                      height={80}
+                      className="mx-auto rounded-md object-cover"
+                    />
+                  )}
                 </TableCell>
 
                 {/* Title */}
@@ -68,7 +78,7 @@ export default async function DiplomasTabel({
                 {/* Actions */}
                 <TableCell>
                   <div className="mx-auto flex size-8 items-center justify-center rounded bg-gray-200">
-                    <SidebarDropdown diplom={item.title} diplomid={item.id}  />
+                    <SidebarDropdown diplom={item.title} diplomid={item.id} />
                   </div>
                 </TableCell>
               </TableRow>
@@ -85,13 +95,23 @@ export default async function DiplomasTabel({
             className="flex items-start gap-3 rounded-md bg-white p-3 shadow-sm"
           >
             {/* Image */}
-            <Image
-              src={item.image}
-              alt={item.title}
-              width={80}
-              height={60}
-              className="shrink-0 rounded-md object-cover"
-            />
+            {item.image ? (
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={80}
+                height={60}
+                className="shrink-0 rounded-md object-cover"
+              />
+            ) : (
+              <Image
+                src={'/assets/images/file-image.png'}
+                alt={item.title}
+                width={80}
+                height={60}
+                className="shrink-0 rounded-md object-cover"
+              />
+            )}
 
             {/* Info */}
             <div className="min-w-0 flex-1">
