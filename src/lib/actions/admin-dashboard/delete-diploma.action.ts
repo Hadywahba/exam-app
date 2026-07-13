@@ -2,6 +2,7 @@
 
 import { getToken } from '@/lib/utility/manage-token';
 import { revalidatePath } from 'next/cache';
+
 export const DeleteDiploma = async (id: string) => {
   const tokenObj = await getToken();
 
@@ -19,6 +20,7 @@ export const DeleteDiploma = async (id: string) => {
   );
 
   const result: ApiDeleteResponse = await response.json();
-  revalidatePath(`/dashboard`);
+  revalidatePath('/dashboard');
+  revalidatePath(`/dashboard/${id}`);
   return result;
 };

@@ -51,10 +51,16 @@ export function SidebarDropdown({ diplom, diplomid }: SidebarDropdownProps) {
 
             {/* SignOut part */}
             <DropdownMenuItem>
-              <div className="flex items-center gap-2">
+              <Link
+                href={{
+                  pathname: `/dashboard/${diplomid}/edit`,
+                  query: { title: `${diplom}` },
+                }}
+                className="flex items-center gap-2"
+              >
                 <PenLine size={16} className="text-blue-600" />
                 <span className="text-sm font-normal text-gray-500">Edit</span>
-              </div>
+              </Link>
             </DropdownMenuItem>
 
             {/* SignOut part */}

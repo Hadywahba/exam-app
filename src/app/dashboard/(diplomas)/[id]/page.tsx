@@ -2,26 +2,8 @@ import React from 'react';
 import { GetDiploma } from './_hooks/get-diploma-id';
 import ListError from '@/components/error/list-error';
 import Image from 'next/image';
-import { Ban } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import DiplomaActions from '../_components/diploma-actions';
-const BUTTONS = [
-  {
-    titleKey: 'Immutable',
-    icon: Ban,
-    color: 'bg-gray-200 hover:bg-gray-300 text-black gap-2',
-  },
-  {
-    titleKey: 'Edit',
-    icon: Ban,
-    color: 'bg-blue-600 text-white',
-  },
-  {
-    titleKey: 'Delete',
-    icon: Ban,
-    color: 'bg-red-600 hover:bg-red-700 text-white',
-  },
-];
+
 export default async function page({ params }: { params: { id: string } }) {
   // Query
   const diplomaId = params.id;
