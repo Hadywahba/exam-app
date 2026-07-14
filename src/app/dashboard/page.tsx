@@ -3,6 +3,7 @@ import DiplomasTabel from './(diplomas)/_components/diplomas-tabel';
 import Search from './(diplomas)/_components/search';
 import DiplomasPagination from './(diplomas)/_components/diplomas-pagination';
 import { GetDiplomas } from './(diplomas)/_hooks/get-diploms';
+import AddNewDiploma from './(diplomas)/_components/add-new-diploma';
 
 export default async function Page({
   searchParams,
@@ -24,25 +25,30 @@ export default async function Page({
       params.immutable === 'true'
         ? true
         : params.immutable === 'false'
-        ? false
-        : null,
+          ? false
+          : null,
     sortBy: params.sortBy,
     sortOrder: params.sortOrder,
   });
 
   return (
-    <div className="mt-6 space-y-6">
+    <div className="space-y-6 border-t-2 border-gray-200">
+      {/* Header */}
+      <header className="flex w-full flex-col items-center justify-center gap-4 bg-white py-4 md:flex md:flex-row md:items-center md:justify-between">
+        <DiplomasPagination
+          currentPage={data?.metadata.page ?? 1}
+          totalPages={data?.metadata.totalPages ?? 1}
+          limit={data?.metadata.limit ?? 10}
+           totalDiploma={data?.metadata.total ?? 1}
+        />
+
+        <AddNewDiploma />
+      </header>
+
+      {/* Search */}
       <Search />
 
-      <DiplomasTabel
-        data={data?.data ?? []}
-        error={error}
-      />
-
-      <DiplomasPagination
-        currentPage={data?.metadata.page ?? 1}
-        totalPages={data?.metadata.totalPages ?? 1}
-      />
+      <DiplomasTabel data={data?.data ?? []} error={error} />
     </div>
   );
 }
