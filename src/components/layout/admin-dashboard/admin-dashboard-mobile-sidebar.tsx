@@ -18,7 +18,7 @@ export default function AdminDashboardMobileSidebar() {
 
   //  Variable
   const isDiplomaActive =
-    pathname === '/dashboard' || pathname.startsWith('/dashboard/exams');
+    pathname === '/dashboard' || pathname.startsWith('/dashboard/');
 
   // Function
   const gotoDiplomaAdminDashboard = () => {

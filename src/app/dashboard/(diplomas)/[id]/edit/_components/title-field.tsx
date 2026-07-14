@@ -17,6 +17,7 @@ interface TitleFieldProps<T extends FieldValues>
   label: string;
   disabled: boolean;
   value?: string;
+  placeholder?: string;
 }
 
 export default function TitleField<T extends FieldValues>({
@@ -26,6 +27,7 @@ export default function TitleField<T extends FieldValues>({
   label,
   disabled,
   value,
+  placeholder,
   ...rest
 }: TitleFieldProps<T>) {
   const isRHF = register && name;
@@ -43,6 +45,7 @@ export default function TitleField<T extends FieldValues>({
           disabled={disabled}
           value={isRHF ? undefined : value}
           {...(isRHF ? register(name as Path<T>) : {})}
+          placeholder={placeholder}
         />
       </div>
 

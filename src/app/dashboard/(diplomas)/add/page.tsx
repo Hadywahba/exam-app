@@ -1,5 +1,13 @@
 import React from 'react';
 
-export default function page() {
-  return <div>add</div>;
+import AddDiplomaInput from './_components/add-diploma-input';
+
+export default async function page() {
+  return (
+    <div className="space-y-4">
+      {/* Inputs */}
+
+      <AddDiplomaInput />
+    </div>
+  );
 }

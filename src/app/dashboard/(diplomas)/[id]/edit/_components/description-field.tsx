@@ -17,6 +17,7 @@ interface DescriptionFieldProps<T extends FieldValues>
   label: string;
   disabled: boolean;
   value?: string;
+   placeholder?: string;
 }
 
 export default function DescriptionField<T extends FieldValues>({
@@ -26,6 +27,7 @@ export default function DescriptionField<T extends FieldValues>({
   label,
   disabled,
   value,
+   placeholder,
   ...rest
 }: DescriptionFieldProps<T>) {
   const isRHF = register && name;
@@ -43,6 +45,7 @@ export default function DescriptionField<T extends FieldValues>({
           value={isRHF ? undefined : value}
           rows={6}
           {...(isRHF ? register(name as Path<T>) : {})}
+            placeholder={placeholder}
         />
       </div>
 

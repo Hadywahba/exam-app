@@ -12,9 +12,7 @@ export default function AdminDashboardSidebarDetails() {
       <ul className="flex flex-col items-start justify-center gap-[.625rem]">
         {AdminSidebarcolumnItems.map((item) => {
           const isActive =
-            item.link === '/dashboard'
-              ? pathname === '/dashboard' || pathname.startsWith('/exam')
-              : pathname.startsWith(item.link);
+            pathname === item.link || pathname.startsWith(`${item.link}/`);
 
           const Icon = isActive ? item.activeImage : item.image;
 
